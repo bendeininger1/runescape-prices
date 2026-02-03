@@ -67,6 +67,10 @@ targetDF.alias("t") .\
 
 # COMMAND ----------
 
+# TODO insert prices into a latest_1h_prices table that has 1 record for each id (the most recent price data)
+
+# COMMAND ----------
+
 # MAGIC %skip
 # MAGIC # Write the DataFrame to a Unity Catalog managed Delta table in the bronze schema, appending the new data
 # MAGIC df_1h_prices.write.mode("append").saveAsTable("runescape.01_bronze.1h_prices")
