@@ -1,0 +1,19 @@
+# This is a Databricks asset bundle definition for runescape-prices.
+# The Databricks extension requires databricks.yml configuration file.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+
+bundle:
+  name: runescape-prices
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://adb-7405614662839419.19.azuredatabricks.net
+
+  ## Optionally, there could be 'staging' or 'prod' targets here.
+  #
+  # prod:
+  #   workspace:
+  #     host: https://adb-7405614662839419.19.azuredatabricks.net
