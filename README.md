@@ -38,7 +38,7 @@ graph TB
 ### Data Flow Diagram
 
 <p align="center">
-  <img src="docs/runescape.drawio.png" alt="Data Flow Diagram" width="100%"/>
+  <img src="docs/runescape.png" alt="Data Flow Diagram" width="100%"/>
 </p>
 
 ### Batch Pipeline Flow
