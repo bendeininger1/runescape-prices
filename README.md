@@ -4,6 +4,10 @@
 
 1. [Overview](#overview)
 2. [Architecture](#architecture)
+3. [Data Flow Diagram](#data-flow-diagram)
+4. [Requirements](#requirements)
+5. [Install](#install)
+6. [Contributing](#contributing)
 
 # Overview <a name="overview"></a>
 
@@ -89,6 +93,13 @@ sequenceDiagram
     SS->>GF: Real-time Metrics
     GF->>GF: Update Dashboard
 ```
+### Requirements
+TODO
 
+### Install
+TODO
+
+### Contributing
+TODO
 
 Disclaimer: This site is not affilated with RuneScape, Old School Runescape, Jagex Ltd, or the OSRS Wiki.
