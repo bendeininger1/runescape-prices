@@ -35,6 +35,12 @@ graph TB
     AS --> ADLS
 ```
 
+### Data Flow Diagram
+
+<p align="center">
+  <img src="docs/runescape.drawio.png" alt="Data Flow Diagram" width="100%"/>
+</p>
+
 ### Batch Pipeline Flow
 
 ```mermaid
