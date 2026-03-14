@@ -45,54 +45,6 @@ graph TB
   <img src="docs/runescape.png" alt="Data Flow Diagram" width="100%"/>
 </p>
 
-### Batch Pipeline Flow
-
-```mermaid
-sequenceDiagram
-    participant BS as Batch Source<br/>(JSON files)
-    participant LF as Lakeflow jobs
-    participant GE as Great Expectations
-    participant MN as MinIO
-    participant SP as Spark Batch
-    participant PG as PostgreSQL
-    participant MG as MongoDB
-    participant PR as Prometheus
-
-    LF->>BS: Trigger Batch Job
-    BS->>LF: Extract Data
-    AF->>GE: Validate Data Quality
-    GE-->>AF: Validation Results
-    AF->>MN: Upload Raw Data
-    AF->>SP: Submit Spark Job
-    SP->>MN: Read Raw Data
-    SP->>SP: Transform & Enrich
-    SP->>PG: Write Processed Data
-    SP->>MG: Write NoSQL Data
-    SP->>PR: Send Metrics
-    AF->>PR: Job Status Metrics
-```
-
-### Streaming Pipeline Flow
-
-```mermaid
-sequenceDiagram
-    participant KP as Kafka Producer
-    participant KT as Kafka Topic
-    participant SS as Spark Streaming
-    participant AD as Anomaly Detection
-    participant PG as PostgreSQL
-    participant MN as MinIO
-    participant GF as Grafana
-
-    KP->>KT: Publish Events
-    KT->>SS: Consume Stream
-    SS->>AD: Process Events
-    AD->>AD: Detect Anomalies
-    AD->>PG: Store Results
-    AD->>MN: Archive Data
-    SS->>GF: Real-time Metrics
-    GF->>GF: Update Dashboard
-```
 ### Requirements
 TODO
 
