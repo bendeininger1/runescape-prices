@@ -46,7 +46,11 @@ graph TB
 </p>
 
 ### Requirements
-TODO
+Runs on Databricks Runtime 17.3 LTS. powered by Apache Spark 4.0.0  
+Datbricks Connect  
+Python 3.12.10+  
+Java 21 SDK  
+Databricks CLI [Link](https://learn.microsoft.com/en-us/azure/databricks/dev-tools/cli/install)
 
 ### Install
 TODO
