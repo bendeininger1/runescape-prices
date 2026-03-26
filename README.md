@@ -53,9 +53,28 @@ Java 21 SDK
 Databricks CLI [Link](https://learn.microsoft.com/en-us/azure/databricks/dev-tools/cli/install)
 
 ### Databricks Setup
-Catalog creaetion  
-1 for dev, test, and prod each.
-TODO add details
+
+#### Catalog creation  
+
+You need to create one catalog for dev, test, and prod each.  
+
+- runescape_dev  
+  - 00_landing
+  - 01_bronze
+  - 02_silver
+  - 03_gold
+- runescape_test  
+  - 00_landing
+  - 01_bronze
+  - 02_silver
+  - 03_gold
+- runescape_prod  
+  - 00_landing
+  - 01_bronze
+  - 02_silver
+  - 03_gold
+
+TODO add details, this should also be done be script.  
 
 ### Install
 TODO  
@@ -95,7 +114,7 @@ auth_type = databricks-cli
 host      = workspace-url  
 auth_type = databricks-cli  
 
-
+databricks.yml
 
 
 
