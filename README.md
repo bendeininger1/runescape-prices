@@ -52,8 +52,52 @@ Python 3.12.10+
 Java 21 SDK  
 Databricks CLI [Link](https://learn.microsoft.com/en-us/azure/databricks/dev-tools/cli/install)
 
+### Databricks Setup
+Catalog creaetion  
+1 for dev, test, and prod each.
+TODO add details
+
 ### Install
-TODO
+TODO  
+setuptools. wheel  
+databricks.yml file  
+Pyspark venv .venv_pyspark
+Uses requirements-pyspark.txt
+
+Testing setup using remote databricks cluster
+requirements.txt  
+pytest install
+Within the python virtual env, you need to run the command below to auth with databricks
+databricks auth login --host "host-url"
+
+Create service principal and OAuth secret  
+secret is used in .databrickscfg for .venv Auth  
+Need to create separate secrets , 1 for dev, test, and prod  
+https://learn.microsoft.com/en-us/azure/databricks/dev-tools/auth/oauth-m2m#-step-1-create-an-oauth-secret  
+https://learn.microsoft.com/en-us/azure/databricks/dev-tools/cli/authentication#m2m-auth
+
+https://accounts.azuredatabricks.net
+
+[DEFAULT]  
+host          = account-console-url  
+client_id     = service-principal-client-id  
+client_secret = service-principal-oauth-secret  
+
+[rsdev]    
+host      = workspace-url
+auth_type = databricks-cli  
+
+[rstest]  
+host      = workspace-url  
+auth_type = databricks-cli  
+
+[rsprod]  
+host      = workspace-url  
+auth_type = databricks-cli  
+
+
+
+
 
 ### Contributing
 TODO
