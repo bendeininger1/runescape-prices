@@ -10,13 +10,11 @@ resources:
       tasks:
         - task_key: 00_drop_duplicates_raw_table
           notebook_task:
-            notebook_path: transformations/01_bronze/drop_duplicates_raw_table
-            source: GIT
+            notebook_path: ../transformations/01_bronze/drop_duplicates_raw_table.ipynb
+            base_parameters:
+              catalog: "${var.catalog}"
+            source: WORKSPACE
           environment_key: Default
-      git_source:
-        git_url: https://github.com/bendeininger1/runescape-prices
-        git_provider: gitHub
-        git_branch: main
       queue:
         enabled: true
       environments:
