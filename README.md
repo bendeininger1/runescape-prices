@@ -11,7 +11,7 @@
 
 # Overview <a name="overview"></a>
 
-The **RuneScape Price Data Ingestion Tool** is desgined to collect, transform, and store data from the [OSRS RuneScape WIKI price API](https://oldschool.runescape.wiki/w/RuneScape:Real-time_Prices) for Old School RuneScape following a medallion architecture.
+The **RuneScape Price Data Ingestion Tool** is designed to collect, transform, and store data from the [OSRS RuneScape WIKI price API](https://oldschool.runescape.wiki/w/RuneScape:Real-time_Prices) for Old School RuneScape following a medallion architecture.
 
 ## Architecture
 The architecture of the end-to-end data pipeline is designed to handle both batch and streaming data processing. Below is a high-level overview of the components and their interactions:
@@ -46,10 +46,77 @@ graph TB
 </p>
 
 ### Requirements
-TODO
+Runs on Databricks Runtime 17.3 LTS. powered by Apache Spark 4.0.0  
+Datbricks Connect  
+Python 3.12.10+  
+Java 21 SDK  
+Databricks CLI [Link](https://learn.microsoft.com/en-us/azure/databricks/dev-tools/cli/install)
+
+### Databricks Setup
+
+#### Catalog creation  
+
+You need to create one catalog for dev, test, and prod each.  
+
+- runescape_dev  
+  - 00_landing
+  - 01_bronze
+  - 02_silver
+  - 03_gold
+- runescape_test  
+  - 00_landing
+  - 01_bronze
+  - 02_silver
+  - 03_gold
+- runescape_prod  
+  - 00_landing
+  - 01_bronze
+  - 02_silver
+  - 03_gold
+
+TODO add details, this should also be done be script.  
 
 ### Install
-TODO
+TODO  
+setuptools. wheel  
+databricks.yml file  
+Pyspark venv .venv_pyspark
+Uses requirements-pyspark.txt
+
+Testing setup using remote databricks cluster
+requirements.txt  
+pytest install
+Within the python virtual env, you need to run the command below to auth with databricks
+databricks auth login --host "host-url"
+
+Create service principal and OAuth secret  
+secret is used in .databrickscfg for .venv Auth  
+Need to create separate secrets , 1 for dev, test, and prod  
+https://learn.microsoft.com/en-us/azure/databricks/dev-tools/auth/oauth-m2m#-step-1-create-an-oauth-secret  
+https://learn.microsoft.com/en-us/azure/databricks/dev-tools/cli/authentication#m2m-auth
+
+https://accounts.azuredatabricks.net
+
+[DEFAULT]  
+host          = account-console-url  
+client_id     = service-principal-client-id  
+client_secret = service-principal-oauth-secret  
+
+[rsdev]    
+host      = workspace-url
+auth_type = databricks-cli  
+
+[rstest]  
+host      = workspace-url  
+auth_type = databricks-cli  
+
+[rsprod]  
+host      = workspace-url  
+auth_type = databricks-cli  
+
+databricks.yml
+
+
 
 ### Contributing
 TODO
