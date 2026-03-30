@@ -68,7 +68,7 @@ You need to create one catalog for dev, test, and prod each.
   - 01_bronze
   - 02_silver
   - 03_gold
-- runescape_prod  
+- runescape  
   - 00_landing
   - 01_bronze
   - 02_silver
