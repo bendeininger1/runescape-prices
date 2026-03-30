@@ -1,0 +1,21 @@
+resources:
+  jobs:
+    latest_prices_raw_stream:
+      name: latest_prices_raw_stream
+      email_notifications:
+        on_failure:
+          - ghost9420_gmail.com#ext#@ghost9420gmail.onmicrosoft.com
+      notification_settings:
+        no_alert_for_skipped_runs: true
+      schedule:
+        quartz_cron_expression: 6 0/10 * * * ?
+        timezone_id: America/New_York
+        pause_status: UNPAUSED
+      tasks:
+        - task_key: run_stream_pipeline
+          pipeline_task:
+            pipeline_id: bbdccfe9-f7b3-4fb2-9921-3ae815faee77
+            full_refresh: false
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED
