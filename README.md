@@ -57,6 +57,7 @@ Databricks CLI [Link](https://learn.microsoft.com/en-us/azure/databricks/dev-too
 #### Catalog creation  
 
 You need to create one catalog for dev, test, and prod each.  
+Select the same storage location for each created schema
 
 - runescape_dev  
   - 00_landing
