@@ -1,0 +1,26 @@
+resources:
+  jobs:
+    delete_old_records_latest_prices_raw:
+      name: delete_old_records_latest_prices_raw
+      trigger:
+        pause_status: UNPAUSED
+        periodic:
+          interval: 6
+          unit: HOURS
+      tasks:
+        - task_key: 01_delete_old_records_latest_prices_raw
+          notebook_task:
+            notebook_path: transformations/01_bronze/delete_old_records_latest_prices_raw
+            source: GIT
+          environment_key: Default
+      git_source:
+        git_url: https://github.com/bendeininger1/runescape-prices
+        git_provider: gitHub
+        git_branch: main
+      queue:
+        enabled: true
+      environments:
+        - environment_key: Default
+          spec:
+            environment_version: "4"
+      performance_target: PERFORMANCE_OPTIMIZED
