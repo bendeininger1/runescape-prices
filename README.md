@@ -78,8 +78,8 @@ You can run the one_off/initial_load/catalog_creation.ipynb file, but first upda
 #### Initial Data Load  
 TODO this section should be automated...  
 Once the catalogs, schemas, and volumes are created, you need to create the directory skill_actions under ../00_landing/data_sources/ for each catalog  
-You then need to copy the json files from data_files/skill_actions to these directoties.
-you can run the resources/initial_load.yml job to create tables.
+You then need to copy the json files from data_files/skill_actions to these directoties.  
+You then need to run resources/initial_load.yml job to create tables/ load the item mapping data.  
 
 ### Install
 TODO  
