@@ -18,7 +18,7 @@ resources:
           depends_on:
             - task_key: 00_ingest_1h_prices
           notebook_task:
-            notebook_path: ../transformations/01_bronze/1h_prices.ipynb\
+            notebook_path: ../transformations/01_bronze/1h_prices.ipynb
             base_parameters:
               catalog: "${var.catalog}"
             source: WORKSPACE
