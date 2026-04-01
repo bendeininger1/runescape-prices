@@ -75,7 +75,11 @@ You can run the one_off/initial_load/catalog_creation.ipynb file, but first upda
   - 02_silver
   - 03_gold
 
-TODO add details, this should also be done be script.  
+#### Initial Data Load  
+TODO this section should be automated...  
+Once the catalogs, schemas, and volumes are created, you need to create the directory skill_actions under ../00_landing/data_sources/ for each catalog  
+You then need to copy the data_files/crafting.json file to these directoties
+you can run the resources/initial_load.yml job to create tables.
 
 ### Install
 TODO  
