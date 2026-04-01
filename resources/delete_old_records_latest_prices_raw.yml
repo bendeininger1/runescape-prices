@@ -20,5 +20,5 @@ resources:
       environments:
         - environment_key: Default
           spec:
-            environment_version: "4"
+            environment_version: "5"
       performance_target: PERFORMANCE_OPTIMIZED
