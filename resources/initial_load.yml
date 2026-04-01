@@ -1,0 +1,99 @@
+resources:
+  jobs:
+    initial_load:
+      name: initial_load
+      tasks:
+        - task_key: 01_ingest_1h_prices_initial_load
+          notebook_task:
+            notebook_path: /Workspace/Users/ghost9420_gmail.com#ext#@ghost9420gmail.onmicrosoft.com/.bundle/runescape-prices/dev/files/one_off/initial_load/00_landing/ingest_1h_prices_initial_load
+            base_parameters:
+              catalog: ${var.catalog}
+            source: WORKSPACE
+          environment_key: Default
+        - task_key: 01_load_item_mapping
+          notebook_task:
+            notebook_path: /Workspace/Users/ghost9420_gmail.com#ext#@ghost9420gmail.onmicrosoft.com/.bundle/runescape-prices/dev/files/one_off/initial_load/catalog_creation
+            base_parameters:
+              catalog: ${var.catalog}
+            source: WORKSPACE
+          environment_key: Default
+        - task_key: 02_1h_prices_initial_load
+          depends_on:
+            - task_key: 01_ingest_1h_prices_initial_load
+          notebook_task:
+            notebook_path: /Workspace/Users/ghost9420_gmail.com#ext#@ghost9420gmail.onmicrosoft.com/.bundle/runescape-prices/dev/files/one_off/initial_load/01_bronze/1h_prices_initial_load
+            base_parameters:
+              catalog: ${var.catalog}
+            source: WORKSPACE
+          environment_key: Default
+        - task_key: 02_skill_action_data_load
+          depends_on:
+            - task_key: 01_load_item_mapping
+          notebook_task:
+            notebook_path: /Workspace/Users/ghost9420_gmail.com#ext#@ghost9420gmail.onmicrosoft.com/.bundle/runescape-prices/dev/files/one_off/initial_load/01_bronze/skill_action_data_load
+            base_parameters:
+              catalog: ${var.catalog}
+            source: WORKSPACE
+        - task_key: 03_1h_prices_cleansed_initial_load
+          depends_on:
+            - task_key: 02_1h_prices_initial_load
+          notebook_task:
+            notebook_path: /Workspace/Users/ghost9420_gmail.com#ext#@ghost9420gmail.onmicrosoft.com/.bundle/runescape-prices/dev/files/one_off/initial_load/02_silver/1h_prices_cleansed_initial_load
+            base_parameters:
+              catalog: ${var.catalog}
+            source: WORKSPACE
+          environment_key: Default
+        - task_key: 03_item_mapping
+          depends_on:
+            - task_key: 02_skill_action_data_load
+          notebook_task:
+            notebook_path: /Workspace/Users/ghost9420_gmail.com#ext#@ghost9420gmail.onmicrosoft.com/.bundle/runescape-prices/dev/files/one_off/initial_load/02_silver/item_mapping
+            base_parameters:
+              catalog: ${var.catalog}
+            source: WORKSPACE
+          environment_key: Default
+        - task_key: 04_1h_prices_enriched_initial_load
+          depends_on:
+            - task_key: 03_1h_prices_cleansed_initial_load
+            - task_key: 03_item_mapping
+          notebook_task:
+            notebook_path: /Workspace/Users/ghost9420_gmail.com#ext#@ghost9420gmail.onmicrosoft.com/.bundle/runescape-prices/dev/files/one_off/initial_load/02_silver/1h_prices_enriched_initial_load
+            base_parameters:
+              catalog: ${var.catalog}
+            source: WORKSPACE
+          environment_key: Default
+        - task_key: 04_skill_action_enriched
+          depends_on:
+            - task_key: 03_item_mapping
+          notebook_task:
+            notebook_path: /Workspace/Users/ghost9420_gmail.com#ext#@ghost9420gmail.onmicrosoft.com/.bundle/runescape-prices/dev/files/one_off/initial_load/02_silver/skill_action_enriched
+            base_parameters:
+              catalog: ${var.catalog}
+            source: WORKSPACE
+          environment_key: Default
+        - task_key: 05_1h_prices_last_enriched_initial_load
+          depends_on:
+            - task_key: 04_1h_prices_enriched_initial_load
+          notebook_task:
+            notebook_path: /Workspace/Users/ghost9420_gmail.com#ext#@ghost9420gmail.onmicrosoft.com/.bundle/runescape-prices/dev/files/one_off/initial_load/02_silver/1h_prices_last_enriched_initial_load
+            base_parameters:
+              catalog: ${var.catalog}
+            source: WORKSPACE
+          environment_key: Default
+        - task_key: 06_1h_prices_last_enriched_initial_load
+          depends_on:
+            - task_key: 05_1h_prices_last_enriched_initial_load
+            - task_key: 04_skill_action_enriched
+          notebook_task:
+            notebook_path: /Workspace/Users/ghost9420_gmail.com#ext#@ghost9420gmail.onmicrosoft.com/.bundle/runescape-prices/dev/files/one_off/initial_load/03_gold/1h_skill_profit_initial_load
+            base_parameters:
+              catalog: ${var.catalog}
+            source: WORKSPACE
+          environment_key: Default
+      queue:
+        enabled: true
+      environments:
+        - environment_key: Default
+          spec:
+            environment_version: "5"
+      performance_target: PERFORMANCE_OPTIMIZED
