@@ -57,7 +57,7 @@ Databricks CLI [Link](https://learn.microsoft.com/en-us/azure/databricks/dev-too
 #### Catalog creation  
 
 You need to create one catalog for dev, test, and prod each.  
-Select the same storage location for each created schema
+You can run the one_off/initial_load/catalog_creation.ipynb file, but first update the Managed Locations with your locations.
 
 - runescape_dev  
   - 00_landing
