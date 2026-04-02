@@ -45,15 +45,3 @@ def delta_sink_flow():
   return(
   spark.readStream.table("latest_prices_raw_stream")
 )
-
-  
-
-
-'''
-with tempfile.TemporaryDirectory(prefix="writeStream") as d:
-    # Create a table with Rate source.
-    query = df.writeStream.toTable(
-        "my_table", checkpointLocation=d)
-    time.sleep(3)
-    query.stop()
-'''
