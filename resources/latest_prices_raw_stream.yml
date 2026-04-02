@@ -14,7 +14,7 @@ resources:
       tasks:
         - task_key: run_stream_pipeline
           pipeline_task:
-            pipeline_id: bbdccfe9-f7b3-4fb2-9921-3ae815faee77
+            pipeline_id: 275a2c78-e43b-45c0-8429-932386dc554b
             full_refresh: false
       queue:
         enabled: true
