@@ -7,7 +7,7 @@ resources:
       libraries:
         - glob:
             include: ../latest_prices_raw_ETL_pipeline/**
-      schema: default
+      schema: "00_landing"
       development: "${var.dev_flag}"
       photon: true
       catalog: "${var.catalog}"
