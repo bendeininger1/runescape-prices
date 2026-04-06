@@ -3,7 +3,6 @@ resources:
     latest_prices_raw_drop_duplicates:
       name: latest_prices_raw_drop_duplicates
       trigger:
-        pause_status: UNPAUSED
         periodic:
           interval: 1
           unit: HOURS

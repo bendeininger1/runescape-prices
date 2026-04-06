@@ -5,7 +5,6 @@ resources:
       schedule:
         quartz_cron_expression: 58 * * * * ?
         timezone_id: America/New_York
-        pause_status: UNPAUSED
       tasks:
         - task_key: 00_ingest_latest_prices
           notebook_task:

@@ -3,7 +3,6 @@ resources:
     delete_old_records_latest_prices_raw:
       name: delete_old_records_latest_prices_raw
       trigger:
-        pause_status: UNPAUSED
         periodic:
           interval: 6
           unit: HOURS

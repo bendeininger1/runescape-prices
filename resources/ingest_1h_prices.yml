@@ -5,7 +5,6 @@ resources:
       schedule:
         quartz_cron_expression: 45 10 * * * ?
         timezone_id: UTC
-        pause_status: UNPAUSED
       tasks:
         - task_key: 00_ingest_1h_prices
           notebook_task:

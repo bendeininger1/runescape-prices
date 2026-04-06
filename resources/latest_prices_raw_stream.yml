@@ -10,7 +10,6 @@ resources:
       schedule:
         quartz_cron_expression: 6 0/10 * * * ?
         timezone_id: America/New_York
-        pause_status: UNPAUSED
       tasks:
         - task_key: run_stream_pipeline
           pipeline_task:
