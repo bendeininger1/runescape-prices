@@ -46,10 +46,12 @@ graph TB
 </p>
 
 ### Requirements
-Runs on Databricks Runtime 17.3 LTS. powered by Apache Spark 4.0.0  
-Datbricks Connect  
-Python 3.12.10+  
-Java 21 SDK  
+Runs on Serverless environment version 5 [Link](https://docs.databricks.com/aws/en/release-notes/serverless/environment-version/five)  
+Operating System: Ubuntu 24.04.3 LTS  
+Python: 3.12.3  
+Databricks Connect: 18 (Databricks Connect is continuously updated in the latest serverless environment version. Run pip list to confirm the exact version in your current environment.)  
+Scala: 2.13.16  
+JDK: 17  
 Databricks CLI [Link](https://learn.microsoft.com/en-us/azure/databricks/dev-tools/cli/install)
 
 ### Databricks Setup
