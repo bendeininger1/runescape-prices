@@ -29,6 +29,7 @@ jobs:
         run: |
           pytest \
             --disable-warnings \
+            --cov=runescape-prices tests\
             --cov-report=html
       - name: Upload coverage HTML report
         uses: actions/upload-artifact@v4
