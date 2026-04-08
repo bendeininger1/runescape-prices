@@ -1,5 +1,5 @@
 # 
 
-def basic_test(spark):
+def test_basic(spark):
             
     assert 0 == 0
