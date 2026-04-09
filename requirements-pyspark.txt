@@ -6,3 +6,5 @@ pandas==3.0.1
 py4j==0.10.9.9
 pyarrow==23.0.1
 pyspark==4.0.0
+pytest==9.0.2
+pytest-cov==7.1.0
