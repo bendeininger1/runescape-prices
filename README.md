@@ -87,8 +87,10 @@ You then need to run resources/initial_load.yml job to create tables/ load the i
 TODO  
 setuptools. wheel  
 databricks.yml file  
-Pyspark venv .venv_pyspark
-Uses requirements-pyspark.txt
+Local testing and CICD workflow will use the Pyspark venv .venv_pyspark
+Uses requirements-pyspark.txt  
+Testing on databricks will use databricks connect venv .venv  
+Uses requirements-dbc.txt  
 
 Testing setup using remote databricks cluster
 requirements.txt  
@@ -99,8 +101,8 @@ databricks auth login --host "host-url"
 Create service principal and OAuth secret  
 secret is used in .databrickscfg for .venv Auth  
 Need to create separate secrets , 1 for dev, test, and prod  
-https://learn.microsoft.com/en-us/azure/databricks/dev-tools/auth/oauth-m2m#-step-1-create-an-oauth-secret  
-https://learn.microsoft.com/en-us/azure/databricks/dev-tools/cli/authentication#m2m-auth
+[link](https://learn.microsoft.com/en-us/azure/databricks/dev-tools/auth/oauth-m2m#-step-1-create-an-oauth-secret)  
+[link](https://learn.microsoft.com/en-us/azure/databricks/dev-tools/cli/authentication#m2m-auth)
 
 https://accounts.azuredatabricks.net
 
@@ -123,7 +125,12 @@ auth_type = databricks-cli
 
 databricks.yml
 
+### CI CD  
+#### Github Actions
+This repo uses github actions to ...  
+Databricks OAuth token federation, also known as OpenID Connect (OIDC)  
 
+[link](https://learn.microsoft.com/en-us/azure/databricks/dev-tools/auth/provider-github)
 
 ### Contributing
 TODO
