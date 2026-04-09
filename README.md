@@ -46,10 +46,12 @@ graph TB
 </p>
 
 ### Requirements
-Runs on Databricks Runtime 17.3 LTS. powered by Apache Spark 4.0.0  
-Datbricks Connect  
-Python 3.12.10+  
-Java 21 SDK  
+Runs on Serverless environment version 5 [Link](https://docs.databricks.com/aws/en/release-notes/serverless/environment-version/five)  
+Operating System: Ubuntu 24.04.3 LTS  
+Python: 3.12.3  
+Databricks Connect: 18 (Databricks Connect is continuously updated in the latest serverless environment version. Run pip list to confirm the exact version in your current environment.)  
+Scala: 2.13.16  
+JDK: 17  
 Databricks CLI [Link](https://learn.microsoft.com/en-us/azure/databricks/dev-tools/cli/install)
 
 ### Databricks Setup
@@ -57,7 +59,7 @@ Databricks CLI [Link](https://learn.microsoft.com/en-us/azure/databricks/dev-too
 #### Catalog creation  
 
 You need to create one catalog for dev, test, and prod each.  
-Select the same storage location for each created schema
+You can run the one_off/initial_load/catalog_creation.ipynb file, but first update the Managed Locations with your locations.
 
 - runescape_dev  
   - 00_landing
@@ -75,7 +77,11 @@ Select the same storage location for each created schema
   - 02_silver
   - 03_gold
 
-TODO add details, this should also be done be script.  
+#### Initial Data Load  
+TODO this section should be automated...  
+Once the catalogs, schemas, and volumes are created, you need to create the directory skill_actions under ../00_landing/data_sources/ for each catalog  
+You then need to copy the json files from data_files/skill_actions to these directoties.  
+You then need to run resources/initial_load.yml job to create tables/ load the item mapping data.  
 
 ### Install
 TODO  
