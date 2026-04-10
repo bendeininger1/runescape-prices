@@ -1,0 +1,22 @@
+resources:
+  jobs:
+    runescape_prices_ingest:
+      name: runescape_prices_ingest
+      schedule:
+        quartz_cron_expression: 58 * * * * ?
+        timezone_id: America/New_York
+      tasks:
+        - task_key: 00_ingest_latest_prices
+          notebook_task:
+            notebook_path: ../transformations/00_landing/ingest_latest_prices.ipynb
+            base_parameters:
+              catalog: "${var.catalog}"
+            source: WORKSPACE
+          environment_key: Default
+      queue:
+        enabled: true
+      environments:
+        - environment_key: Default
+          spec:
+            environment_version: "5"
+      performance_target: PERFORMANCE_OPTIMIZED

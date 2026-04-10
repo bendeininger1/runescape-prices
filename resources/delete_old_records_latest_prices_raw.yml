@@ -1,0 +1,23 @@
+resources:
+  jobs:
+    delete_old_records_latest_prices_raw:
+      name: delete_old_records_latest_prices_raw
+      trigger:
+        periodic:
+          interval: 6
+          unit: HOURS
+      tasks:
+        - task_key: 01_delete_old_records_latest_prices_raw
+          notebook_task:
+            notebook_path: ../transformations/01_bronze/delete_old_records_latest_prices_raw.ipynb
+            base_parameters:
+              catalog: "${var.catalog}"
+            source: WORKSPACE
+          environment_key: Default
+      queue:
+        enabled: true
+      environments:
+        - environment_key: Default
+          spec:
+            environment_version: "5"
+      performance_target: PERFORMANCE_OPTIMIZED
