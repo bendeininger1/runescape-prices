@@ -74,13 +74,6 @@ resources:
               catalog: ${var.catalog}
             source: WORKSPACE
           environment_key: Default
-        - task_key: 01_ingest_1h_prices_initial_load
-          notebook_task:
-            notebook_path: ../one_off/initial_load/00_landing/ingest_1h_prices_initial_load.ipynb
-            base_parameters:
-              catalog: ${var.catalog}
-            source: WORKSPACE
-          environment_key: Default
         - task_key: 01_load_item_mapping
           notebook_task:
             notebook_path: ../one_off/initial_load/00_landing/load_item_mapping.ipynb
