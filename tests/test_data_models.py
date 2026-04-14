@@ -1,6 +1,6 @@
 # test_data_models.py
 
-from src.utils.data_models import make_1m_price_df, make_1h_price_df
+from utils.data_models import make_1m_price_df, make_1h_price_df
 from pyspark.testing.utils import assertDataFrameEqual
 
 def test_make_1m_price_df(spark):

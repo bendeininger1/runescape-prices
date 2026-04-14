@@ -63,5 +63,7 @@ resources:
       environments:
         - environment_key: Default
           spec:
+            dependencies:
+              - ../dist/rs_project-0.0.2-py3-none-any.whl
             environment_version: "5"
       performance_target: PERFORMANCE_OPTIMIZED
