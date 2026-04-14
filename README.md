@@ -96,7 +96,9 @@ Testing setup using remote databricks cluster
 requirements.txt  
 pytest install
 Within the python virtual env, you need to run the command below to auth with databricks
-databricks auth login --host "host-url"
+databricks auth login --host "host-url"  
+
+rs_project wheel install  
 
 Create service principal and OAuth secret  
 secret is used in .databrickscfg for .venv Auth  
