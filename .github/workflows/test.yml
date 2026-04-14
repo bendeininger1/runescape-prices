@@ -1,15 +1,15 @@
-name: CI Workflow
+name: Build and Test
 
 on:
   push:
     branches:
-      - 'feature/**'
+      - 'main'
   pull_request:
     branches:
       - 'main'
 jobs:
-  ci_job:
-    name: CI Job
+  test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
