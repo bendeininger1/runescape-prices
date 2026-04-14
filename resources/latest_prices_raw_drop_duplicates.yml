@@ -1,0 +1,23 @@
+resources:
+  jobs:
+    latest_prices_raw_drop_duplicates:
+      name: latest_prices_raw_drop_duplicates
+      trigger:
+        periodic:
+          interval: 1
+          unit: HOURS
+      tasks:
+        - task_key: 00_drop_duplicates_raw_table
+          notebook_task:
+            notebook_path: ../transformations/01_bronze/drop_duplicates_raw_table.ipynb
+            base_parameters:
+              catalog: "${var.catalog}"
+            source: WORKSPACE
+          environment_key: Default
+      queue:
+        enabled: true
+      environments:
+        - environment_key: Default
+          spec:
+            environment_version: "5"
+      performance_target: PERFORMANCE_OPTIMIZED
