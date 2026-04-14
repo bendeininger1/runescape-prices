@@ -136,3 +136,65 @@ def make_df_1h_price(spark, data):
     output_df = df.withColumn("time", lit(data.get('timestamp')).cast("bigint"))
 
     return output_df
+
+def make_df_1h_price_last_enriched(spark, df_1h_prices_enriched):
+    """
+    Make a price Dataframe from enriched hourly price data from the silver layer with only a single record (latest)
+
+    Parameters
+    ----------
+    df : pyspark.sql.Dataframe
+        enriched hourly price data from the silver layer
+        df_1h_prices_enriched
+            id: int
+            avg1HourHigh: int
+            avg1HourHighVolume: int
+            avg1HourLow: int
+            avg1HourLowVolume: int
+            time: bigint
+            name: string
+            highalch: int
+            limit: int
+            members: string
+         
+
+
+    Returns
+    -------
+    df : pyspark.sql.Dataframe
+        df_1h_prices_last_enriched
+            id: int
+            avg1HourHigh: int
+            avg1HourHighVolume: int
+            avg1HourLow: int
+            avg1HourLowVolume: int
+            time: bigint
+            name: string
+            highalch: int
+            limit: int
+            members: string
+            
+    """
+
+    # Create Aggregate Dataframe grouping by id to get the max time value for each id
+    # this represents the "last" hourly price record for each given item
+    df_latest_time = df_1h_prices_enriched.groupBy("id").max("time").withColumnRenamed("max(time)", "time")
+
+    # Join the df_latest_time with the enriched hourly price data
+    df_1h_prices_last_enriched = df_1h_prices_enriched.join(df_latest_time, ["id", "time"])
+
+    # ReOrder columns
+    df_1h_prices_last_enriched = df_1h_prices_last_enriched.select(
+        'id',
+        'avg1HourHigh',
+        'avg1HourHighVolume',
+        'avg1HourLow',
+        'avg1HourLowVolume',
+        'time',
+        'name',
+        'highalch',
+        'limit',
+        'members'
+    )
+
+    return df_1h_prices_last_enriched
