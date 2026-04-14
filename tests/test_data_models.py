@@ -1,9 +1,9 @@
 # test_data_models.py
 
-from utils.data_models import make_1m_price_df, make_1h_price_df
+from utils.data_models import make_df_1m_price, make_df_1h_price
 from pyspark.testing.utils import assertDataFrameEqual
 
-def test_make_1m_price_df(spark):
+def test_make_df_1m_price(spark):
     
     # Create a example json data
     data = {
@@ -17,7 +17,7 @@ def test_make_1m_price_df(spark):
 		}
 	}
     # Create data frame using data_models util
-    result_df = make_1m_price_df(spark, data)
+    result_df = make_df_1m_price(spark, data)
 
     expected_data = [(2, 304, 1775841793, "high"),
                      (2, 300, 1775841765, "low")]
@@ -28,7 +28,7 @@ def test_make_1m_price_df(spark):
 
     assertDataFrameEqual(result_df, expected_df)
 
-def test_make_1h_price_df(spark):
+def test_make_df_1h_price(spark):
     
     # Create a example json data
     data = {
@@ -43,7 +43,7 @@ def test_make_1h_price_df(spark):
         "timestamp": 1775836800
     }
     # Create data frame using data_models util
-    result_df = make_1h_price_df(spark, data)
+    result_df = make_df_1h_price(spark, data)
 
     expected_data = [(2, 306, 737968, 302, 181867, 1775836800)]
     

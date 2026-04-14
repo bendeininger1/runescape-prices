@@ -1,7 +1,7 @@
 #
 from pyspark.sql.functions import lit, col
 
-def make_1m_price_df(spark, data):
+def make_df_1m_price(spark, data):
     """
     Make a price Dataframe from the raw ingested data.
 
@@ -77,7 +77,7 @@ def make_1m_price_df(spark, data):
 
     return output_df
 
-def make_1h_price_df(spark, data):
+def make_df_1h_price(spark, data):
     """
     Make a price Dataframe from the raw ingested data.
 
