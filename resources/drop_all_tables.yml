@@ -1,0 +1,17 @@
+resources:
+  jobs:
+    drop_all_tables:
+      name: drop_all_tables
+      tasks:
+        - task_key: 00_drop_all_tables
+          notebook_task:
+            notebook_path: ../one_off/drop_all_tables.ipynb
+            base_parameters:
+              catalog: "${var.catalog}"
+            source: WORKSPACE
+          environment_key: Default
+      environments:
+        - environment_key: Default
+          spec:
+            environment_version: "5"
+      performance_target: PERFORMANCE_OPTIMIZED
