@@ -301,7 +301,7 @@ def make_df_1m_price_new(spark, df_raw):
         ),
     ).selectExpr("inline(tab)")
 
-    # Convert df
+    # Convert df so columns are split
     df3 = df2.select('id', sf.inline(sf.array('price_data')))
 
     # Cast data types
