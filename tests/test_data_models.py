@@ -1,6 +1,6 @@
 # test_data_models.py
 
-from utils.data_models import make_df_1m_price, make_df_1h_price, make_df_1h_price_last_enriched
+from utils.data_models import make_df_1m_price, make_df_1h_price, make_df_1h_price_last_enriched, make_df_1m_price_new
 from pyspark.testing.utils import assertDataFrameEqual
 from pyspark.sql.types import StructType, StructField, LongType, StringType, IntegerType, DoubleType
 
@@ -106,6 +106,51 @@ def test_make_df_1h_price_last_enriched(spark):
     result_df = make_df_1h_price_last_enriched(spark, df_1h_prices_enriched)
 
     expected_df = spark.createDataFrame(expected_data, schema_1h_prices_last_enriched)
+
+    assertDataFrameEqual(result_df, expected_df)
+
+# TODO Rename
+def test_make_df_1m_price_new(spark):
+    
+    # Create a example json data
+    json_data = '''{
+	"data": {
+            "2": {
+                "high": 290,
+                "highTime": 1776281201,
+                "low": 282,
+                "lowTime": 1776281112
+            },
+            "6": {
+                "high": 187838,
+                "highTime": 1776280798,
+                "low": 186735,
+                "lowTime": 1776281094
+            },
+            "8": {
+                "high": 195680,
+                "highTime": 1776280843,
+                "low": 193345,
+                "lowTime": 1776281097
+            }
+        }
+    }'''
+    # Create data frame
+    df_raw = spark.read.json("tests/data/latest_prices_test.json", multiLine =True)
+
+    # Create data frame using data_models util
+    result_df = make_df_1m_price_new(spark, df_raw)
+
+    expected_data = [(2, 290, 1776281201, "high"),
+                     (2, 282, 1776281112, "low"),
+                     (6, 187838, 1776280798, "high"),
+                     (6, 186735, 1776281094, "low"),
+                     (8, 195680, 1776280843, "high"),
+                     (8, 193345, 1776281097, "low")]
+    
+    schema = "id: int, price: int, time: bigint, highorlow: string"
+
+    expected_df = spark.createDataFrame(expected_data, schema)
 
     assertDataFrameEqual(result_df, expected_df)
     
