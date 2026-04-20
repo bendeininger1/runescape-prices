@@ -41,12 +41,19 @@ def test_archive_raw_files():
     archive_raw_files(source_path, dest_path, time_filter)
 
     # Original file should still be located here...
-    assert os.path.exists("tests/data/fs_utils/archive_raw_files/original_file/latest_prices_1776697045.json") == True
+    assertion1 = os.path.exists("tests/data/fs_utils/archive_raw_files/original_file/latest_prices_1776697045.json") #True
 
     # Old file should be in dest_path
-    assert os.path.exists("tests/data/fs_utils/archive_raw_files/destination/latest_prices_1776697045.json") == True
+    assertion2 = os.path.exists("tests/data/fs_utils/archive_raw_files/destination/latest_prices_1776697045.json") #True
     # Old file should not be in source_path
-    assert os.path.exists("tests/data/fs_utils/archive_raw_files/source/latest_prices_1776697045.json") == False
+    assertion3 = os.path.exists("tests/data/fs_utils/archive_raw_files/source/latest_prices_1776697045.json") #False
+
+    # recent file should not be in dest_path
+    assertion4 = os.path.exists("tests/data/fs_utils/archive_raw_files/destination/" + recent_file_name) #False
+    # recent file should be in source_path
+    assertion5 = os.path.exists("tests/data/fs_utils/archive_raw_files/source/" + recent_file_name) #True
+
+    assert (assertion1, assertion2, assertion3, assertion4, assertion5 )==(True, True, False, False, True)
 
     ## DELETE temp files
     shutil.rmtree(source_path)
