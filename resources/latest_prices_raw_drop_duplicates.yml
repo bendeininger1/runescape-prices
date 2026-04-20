@@ -2,10 +2,9 @@ resources:
   jobs:
     latest_prices_raw_drop_duplicates:
       name: latest_prices_raw_drop_duplicates
-      trigger:
-        periodic:
-          interval: 1
-          unit: HOURS
+      schedule:
+        quartz_cron_expression: 36 0/10 * * * ?
+        timezone_id: America/New_York
       tasks:
         - task_key: 00_drop_duplicates_raw_table
           notebook_task:
