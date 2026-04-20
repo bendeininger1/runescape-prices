@@ -9,12 +9,13 @@ resources:
         - task_key: 00_ingest_latest_prices
           notebook_task:
             notebook_path: ../transformations/00_landing/ingest_latest_prices.ipynb
-            base_parameters:
-              catalog: "${var.catalog}"
             source: WORKSPACE
           environment_key: Default
       queue:
         enabled: true
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
       environments:
         - environment_key: Default
           spec:

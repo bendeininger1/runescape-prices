@@ -10,12 +10,13 @@ resources:
         - task_key: 00_drop_duplicates_raw_table
           notebook_task:
             notebook_path: ../transformations/01_bronze/drop_duplicates_raw_table.ipynb
-            base_parameters:
-              catalog: "${var.catalog}"
             source: WORKSPACE
           environment_key: Default
       queue:
         enabled: true
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
       environments:
         - environment_key: Default
           spec:
