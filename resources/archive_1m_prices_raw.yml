@@ -1,0 +1,26 @@
+resources:
+  jobs:
+    archive_1m_prices_raw:
+      name: archive_1m_prices_raw
+      schedule:
+        quartz_cron_expression: 33 0/10 * * * ?
+        timezone_id: America/New_York
+      max_concurrent_runs: 1
+      tasks:
+        - task_key: 00_archive_1m_prices_raw
+          notebook_task:
+            notebook_path: ../transformations/00_landing/archive_1m_prices_raw.ipynb
+            source: WORKSPACE
+          environment_key: Default
+      queue:
+        enabled: false
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+      environments:
+        - environment_key: Default
+          spec:
+            dependencies:
+              - ../dist/*.whl
+            environment_version: "5"
+      performance_target: PERFORMANCE_OPTIMIZED
