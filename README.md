@@ -54,6 +54,11 @@ Scala: 2.13.16
 JDK: 17  
 Databricks CLI [Link](https://learn.microsoft.com/en-us/azure/databricks/dev-tools/cli/install)
 
+### Azure Setup
+#### Storage Account
+
+Enable File Events when setting up the external storage in the Databricks Catalog Explorer.
+
 ### Databricks Setup
 
 #### Catalog creation  
