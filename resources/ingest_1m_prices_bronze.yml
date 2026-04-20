@@ -1,0 +1,25 @@
+resources:
+  jobs:
+    ingest_1m_prices_bronze:
+      name: ingest_1m_prices_bronze
+      trigger:
+        file_arrival:
+          url: /Volumes/${var.catalog}/00_landing/data_sources/latest_prices/
+      tasks:
+        - task_key: 00_1m_prices
+          notebook_task:
+            notebook_path: ../transformations/01_bronze/1m_prices.ipynb
+            source: WORKSPACE
+          environment_key: Default
+      queue:
+        enabled: false
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+      environments:
+        - environment_key: Default
+          spec:
+            dependencies:
+              - ../dist/*.whl
+            environment_version: "5"
+      performance_target: PERFORMANCE_OPTIMIZED
