@@ -132,7 +132,7 @@ def test_make_df_1m_price_new(spark):
                 "highTime": 1776280843,
                 "low": 193345,
                 "lowTime": 1776281097
-            }
+            }...
         }
     }'''
     # Create data frame
@@ -146,11 +146,12 @@ def test_make_df_1m_price_new(spark):
                      (6, 187838, 1776280798, "high"),
                      (6, 186735, 1776281094, "low"),
                      (8, 195680, 1776280843, "high"),
-                     (8, 193345, 1776281097, "low")]
+                     (8, 193345, 1776281097, "low"),
+                     (2660, 50000, 1618883126, "high")]
     
     schema = "id: int, price: int, time: bigint, highorlow: string"
 
     expected_df = spark.createDataFrame(expected_data, schema)
 
-    assertDataFrameEqual(result_df, expected_df)
+    assertDataFrameEqual(result_df, expected_df, checkRowOrder=False)
     

@@ -329,4 +329,7 @@ def make_df_1m_price_new(spark, df_raw):
     # union both dataframes
     output_df = df_high.union(df_low)
 
+    # Drop any null values
+    output_df = output_df.na.drop()
+
     return output_df

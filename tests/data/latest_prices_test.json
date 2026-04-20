@@ -17,6 +17,12 @@
 			"highTime": 1776280843,
 			"low": 193345,
 			"lowTime": 1776281097
+		},
+		"2660": {
+			"high": 50000,
+			"highTime": 1618883126,
+			"low": null,
+			"lowTime": null
 		}
 	}
 }
