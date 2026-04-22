@@ -1,0 +1,68 @@
+name: CD Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  cd-deploy-test:
+    name: Deploy to TEST
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6.0.2
+
+      - name: Setup Python
+        uses: actions/setup-python@v6.2.0
+        with:
+          python-version: '3.12.3'
+
+      - name: Install Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install setuptools wheel
+          python setup.py bdist_wheel
+          pip install ./dist/rs_project-0.0.10-py3-none-any.whl
+          pip install -r requirements-pyspark.txt
+
+      - run: databricks bundle deploy
+        working-directory: .
+        env:
+          DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
+          DATABRICKS_BUNDLE_ENV: test
+
+  cd-deploy-prod:
+    name: Deploy to PROD
+    needs: cd-deploy-test
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6.0.2
+
+      - name: Setup Python
+        uses: actions/setup-python@v6.2.0
+        with:
+          python-version: '3.12.3'
+
+      - name: Install Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install setuptools wheel
+          python setup.py bdist_wheel
+          pip install ./dist/rs_project-0.0.10-py3-none-any.whl
+          pip install -r requirements-pyspark.txt
+          
+      - run: databricks bundle deploy
+        working-directory: .
+        env:
+          DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
+          DATABRICKS_BUNDLE_ENV: prod
