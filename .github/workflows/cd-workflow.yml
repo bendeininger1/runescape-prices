@@ -49,7 +49,7 @@ jobs:
         env:
           DATABRICKS_AUTH_TYPE: github-oidc
           DATABRICKS_HOST: https://adb-7405609042674093.13.azuredatabricks.net
-          DATABRICKS_CLIENT_ID: f1ad9f02-7357-4764-8c55-b420118baf6c
+          DATABRICKS_CLIENT_ID: 07ec66d2-eff9-4580-91c1-1fdef498c3e7
 
   cd-deploy-prod:
     name: Deploy to PROD
