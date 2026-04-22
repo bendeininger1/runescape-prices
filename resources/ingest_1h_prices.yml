@@ -9,8 +9,6 @@ resources:
         - task_key: 00_ingest_1h_prices
           notebook_task:
             notebook_path: ../transformations/00_landing/ingest_1h_prices.ipynb
-            base_parameters:
-              catalog: "${var.catalog}"
             source: WORKSPACE
           environment_key: Default
         - task_key: 01_1hr_prices
@@ -18,8 +16,6 @@ resources:
             - task_key: 00_ingest_1h_prices
           notebook_task:
             notebook_path: ../transformations/01_bronze/1h_prices.ipynb
-            base_parameters:
-              catalog: "${var.catalog}"
             source: WORKSPACE
           environment_key: Default
         - task_key: 02_1h_prices_cleansed
@@ -27,8 +23,6 @@ resources:
             - task_key: 01_1hr_prices
           notebook_task:
             notebook_path: ../transformations/02_silver/1h_prices_cleansed.ipynb
-            base_parameters:
-              catalog: "${var.catalog}"
             source: WORKSPACE
           environment_key: Default
         - task_key: 03_1h_prcies_enriched
@@ -36,8 +30,6 @@ resources:
             - task_key: 02_1h_prices_cleansed
           notebook_task:
             notebook_path: ../transformations/02_silver/1h_prices_enriched.ipynb
-            base_parameters:
-              catalog: "${var.catalog}"
             source: WORKSPACE
           environment_key: Default
         - task_key: 04_1h_prices_last_enriched
@@ -45,8 +37,6 @@ resources:
             - task_key: 03_1h_prcies_enriched
           notebook_task:
             notebook_path: ../transformations/02_silver/1h_prices_last_enriched.ipynb
-            base_parameters:
-              catalog: "${var.catalog}"
             source: WORKSPACE
           environment_key: Default
         - task_key: 05_1h_skill_profit
@@ -54,16 +44,17 @@ resources:
             - task_key: 04_1h_prices_last_enriched
           notebook_task:
             notebook_path: ../transformations/03_gold/1h_skill_profit.ipynb
-            base_parameters:
-              catalog: "${var.catalog}"
             source: WORKSPACE
           environment_key: Default
       queue:
         enabled: true
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
       environments:
         - environment_key: Default
           spec:
             dependencies:
-              - ../dist/rs_project-0.0.7-py3-none-any.whl
+              - ../dist/*.whl
             environment_version: "5"
       performance_target: PERFORMANCE_OPTIMIZED

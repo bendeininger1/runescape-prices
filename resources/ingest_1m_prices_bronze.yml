@@ -1,18 +1,18 @@
 resources:
   jobs:
-    runescape_prices_ingest:
-      name: runescape_prices_ingest
-      schedule:
-        quartz_cron_expression: 58 * * * * ?
-        timezone_id: America/New_York
+    ingest_1m_prices_bronze:
+      name: ingest_1m_prices_bronze
+      trigger:
+        file_arrival:
+          url: /Volumes/${var.catalog}/00_landing/data_sources/latest_prices/
       tasks:
-        - task_key: 00_ingest_latest_prices
+        - task_key: 00_1m_prices
           notebook_task:
-            notebook_path: ../transformations/00_landing/ingest_latest_prices.ipynb
+            notebook_path: ../transformations/01_bronze/1m_prices.ipynb
             source: WORKSPACE
           environment_key: Default
       queue:
-        enabled: true
+        enabled: false
       parameters:
         - name: catalog
           default: ${var.catalog}

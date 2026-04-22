@@ -6,10 +6,11 @@ resources:
         - task_key: 00_drop_all_tables
           notebook_task:
             notebook_path: ../one_off/drop_all_tables.ipynb
-            base_parameters:
-              catalog: "${var.catalog}"
             source: WORKSPACE
           environment_key: Default
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
       environments:
         - environment_key: Default
           spec:

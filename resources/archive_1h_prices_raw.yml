@@ -1,18 +1,19 @@
 resources:
   jobs:
-    runescape_prices_ingest:
-      name: runescape_prices_ingest
+    archive_1h_prices_raw:
+      name: archive_1h_prices_raw
       schedule:
-        quartz_cron_expression: 58 * * * * ?
+        quartz_cron_expression: 33 0/10 * * * ?
         timezone_id: America/New_York
+      max_concurrent_runs: 1
       tasks:
-        - task_key: 00_ingest_latest_prices
+        - task_key: 00_archive_1h_prices_raw
           notebook_task:
-            notebook_path: ../transformations/00_landing/ingest_latest_prices.ipynb
+            notebook_path: ../transformations/00_landing/archive_1h_prices_raw.ipynb
             source: WORKSPACE
           environment_key: Default
       queue:
-        enabled: true
+        enabled: false
       parameters:
         - name: catalog
           default: ${var.catalog}

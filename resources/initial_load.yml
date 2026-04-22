@@ -7,85 +7,61 @@ resources:
         - task_key: 01_latest_prices_raw_table_create
           notebook_task:
             notebook_path: ../one_off/initial_load/01_bronze/latest_prices_raw_table_create.ipynb
-            base_parameters:
-              catalog: ${var.catalog}
             source: WORKSPACE
           environment_key: Default
         - task_key: 01_1h_prices_table_create
           notebook_task:
             notebook_path: ../one_off/initial_load/01_bronze/1h_prices_table_create.ipynb
-            base_parameters:
-              catalog: ${var.catalog}
             source: WORKSPACE
           environment_key: Default
         - task_key: 01_skill_action_bronze_table_create
           notebook_task:
             notebook_path: ../one_off/initial_load/01_bronze/1h_prices_table_create.ipynb
-            base_parameters:
-              catalog: ${var.catalog}
             source: WORKSPACE
           environment_key: Default
         - task_key: 01_latest_prices_cleansed_table_create
           notebook_task:
             notebook_path: ../one_off/initial_load/02_silver/latest_prices_cleansed_table_create.ipynb
-            base_parameters:
-              catalog: ${var.catalog}
             source: WORKSPACE
           environment_key: Default
         - task_key: 01_latest_prices_enriched_table_create
           notebook_task:
             notebook_path: ../one_off/initial_load//02_silver/latest_prices_enriched_table_create.ipynb
-            base_parameters:
-              catalog: ${var.catalog}
             source: WORKSPACE
           environment_key: Default
         - task_key: 01_1h_prices_cleansed_table_create
           notebook_task:
             notebook_path: ../one_off/initial_load/02_silver/1h_prices_cleansed_table_create.ipynb
-            base_parameters:
-              catalog: ${var.catalog}
             source: WORKSPACE
           environment_key: Default
         - task_key: 01_1h_prices_enriched_table_create
           notebook_task:
             notebook_path: ../one_off/initial_load/02_silver/1h_prices_enriched_table_create.ipynb
-            base_parameters:
-              catalog: ${var.catalog}
             source: WORKSPACE
           environment_key: Default
         - task_key: 01_1h_prices_last_enriched_table_create
           notebook_task:
             notebook_path: ../one_off/initial_load/02_silver/1h_prices_last_enriched_table_create.ipynb
-            base_parameters:
-              catalog: ${var.catalog}
             source: WORKSPACE
           environment_key: Default
         - task_key: 01_item_mapping_table_create
           notebook_task:
             notebook_path: ../one_off/initial_load/02_silver/item_mapping_table_create.ipynb
-            base_parameters:
-              catalog: ${var.catalog}
             source: WORKSPACE
           environment_key: Default
         - task_key: 01_1h_skill_profit_table_create
           notebook_task:
             notebook_path: ../one_off/initial_load/03_gold/1h_skill_profit_table_create.ipynb
-            base_parameters:
-              catalog: ${var.catalog}
             source: WORKSPACE
           environment_key: Default
         - task_key: 01_load_item_mapping
           notebook_task:
             notebook_path: ../one_off/initial_load/00_landing/load_item_mapping.ipynb
-            base_parameters:
-              catalog: ${var.catalog}
             source: WORKSPACE
           environment_key: Default
         - task_key: 01_skill_action_silver_table_create
           notebook_task:
             notebook_path: ../one_off/initial_load/02_silver/skill_action_silver_table_create.ipynb
-            base_parameters:
-              catalog: ${var.catalog}
             source: WORKSPACE
           environment_key: Default
         - task_key: 02_skill_action_data_load
@@ -94,8 +70,6 @@ resources:
             - task_key: 01_skill_action_bronze_table_create
           notebook_task:
             notebook_path: ../one_off/initial_load/01_bronze/skill_action_data_load.ipynb
-            base_parameters:
-              catalog: ${var.catalog}
             source: WORKSPACE
         - task_key: 03_item_mapping
           depends_on:
@@ -103,8 +77,6 @@ resources:
             - task_key: 01_item_mapping_table_create
           notebook_task:
             notebook_path: ../one_off/initial_load/02_silver/item_mapping.ipynb
-            base_parameters:
-              catalog: ${var.catalog}
             source: WORKSPACE
           environment_key: Default
         - task_key: 04_skill_action_enriched
@@ -113,12 +85,13 @@ resources:
             - task_key: 01_skill_action_silver_table_create
           notebook_task:
             notebook_path: ../one_off/initial_load/02_silver/skill_action_enriched.ipynb
-            base_parameters:
-              catalog: ${var.catalog}
             source: WORKSPACE
           environment_key: Default 
       queue:
         enabled: true
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
       environments:
         - environment_key: Default
           spec:
