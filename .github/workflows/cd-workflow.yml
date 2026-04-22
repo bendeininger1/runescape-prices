@@ -40,12 +40,12 @@ jobs:
           DATABRICKS_BUNDLE_ENV: test
           EOF
 
-      - run: databricks bundle deploy --target test 
+      - run: databricks bundle deploy
         working-directory: .
         env:
+          DATABRICKS_AUTH_TYPE: github-oidc
           DATABRICKS_HOST: https://adb-7405609042674093.13.azuredatabricks.net
-          DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
-          DATABRICKS_BUNDLE_ENV: test
+          DATABRICKS_CLIENT_ID: f1ad9f02-7357-4764-8c55-b420118baf6c
 
   cd-deploy-prod:
     name: Deploy to PROD
