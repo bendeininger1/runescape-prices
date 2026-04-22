@@ -33,6 +33,7 @@ jobs:
       - run: databricks bundle deploy
         working-directory: .
         env:
+          DATABRICKS_HOST: https://adb-7405609042674093.13.azuredatabricks.net
           DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
           DATABRICKS_BUNDLE_ENV: test
 
@@ -64,5 +65,6 @@ jobs:
       - run: databricks bundle deploy
         working-directory: .
         env:
+          DATABRICKS_HOST: https://adb-7405604569792585.5.azuredatabricks.net
           DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
           DATABRICKS_BUNDLE_ENV: prod
