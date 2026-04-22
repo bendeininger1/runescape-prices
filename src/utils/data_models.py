@@ -216,8 +216,7 @@ def make_df_1h_price_last_enriched(spark, df_1h_prices_enriched):
 
     return df_1h_prices_last_enriched
 
-# TODO rename
-def make_df_1m_price_new(spark, df_raw):
+def make_df_1m_price(spark, df_raw):
     """
     Make a price Dataframe from the raw ingested data frame.
 
