@@ -50,7 +50,7 @@ targets:
     mode: production
     variables:
       catalog:
-        default: "runescape"
+        default: "runescape_prod"
       dev_flag:
         default: false
     workspace:
