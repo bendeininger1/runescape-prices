@@ -41,10 +41,10 @@ targets:
       host: https://adb-7405609042674093.13.azuredatabricks.net
       root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
     permissions:
-      - service_principal_name: 07ec66d2-eff9-4580-91c1-1fdef498c3e7 # update with your service principal name
+      - service_principal_name: ${{ secrets.DATABRICKS_CLIENT_ID }} # update with your service principal name
         level: CAN_MANAGE
     run_as:
-      service_principal_name: 07ec66d2-eff9-4580-91c1-1fdef498c3e7 # update with your service principal name
+      service_principal_name: ${{ secrets.DATABRICKS_CLIENT_ID }} # update with your service principal name
 
   prod:
     mode: production
@@ -57,7 +57,7 @@ targets:
       host: https://adb-7405604569792585.5.azuredatabricks.net
       root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
     permissions:
-      - service_principal_name: sp-databricks-rs-prod-cicd-useast # update with your service principal name
+      - service_principal_name: ${{ secrets.DATABRICKS_CLIENT_ID }} # update with your service principal name
         level: CAN_MANAGE
     run_as:
-      service_principal_name: sp-databricks-rs-prod-cicd-useast # update with your service principal name
+      service_principal_name: ${{ secrets.DATABRICKS_CLIENT_ID }} # update with your service principal name
