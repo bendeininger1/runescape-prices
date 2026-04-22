@@ -44,7 +44,7 @@ jobs:
           DATABRICKS_BUNDLE_ENV: test
           EOF
 
-      - run: databricks bundle deploy --target = test
+      - run: databricks bundle deploy --target test
         working-directory: .
         env:
           DATABRICKS_AUTH_TYPE: github-oidc
