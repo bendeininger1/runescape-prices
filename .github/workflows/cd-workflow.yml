@@ -65,20 +65,10 @@ jobs:
           python setup.py bdist_wheel
           pip install ./dist/rs_project-0.0.10-py3-none-any.whl
           pip install -r requirements-pyspark.txt
-
-      - name: Configure Databricks
-        run: |
-          # write out the profile (here called "PROD")
-          cat <<EOF > ~/.databrickscfg
-          [TEST]
-          host = https://adb-7405604569792585.5.azuredatabricks.net
-          DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
-          DATABRICKS_BUNDLE_ENV: prod
-          EOF
           
       - run: databricks bundle deploy --target prod
         working-directory: .
         env:
-          DATABRICKS_HOST: https://adb-7405604569792585.5.azuredatabricks.net
-          DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
-          DATABRICKS_BUNDLE_ENV: prod
+          DATABRICKS_AUTH_TYPE: github-oidc
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
