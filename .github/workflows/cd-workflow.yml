@@ -38,28 +38,19 @@ jobs:
           pip install ./dist/rs_project-0.0.10-py3-none-any.whl
           pip install -r requirements-pyspark.txt
 
-      - name: Configure Databricks
+      - name: Set values for Databricks asset bundle definition
+        shell: bash
         run: |
-          # write out the profile (here called "TEST")
-          cat <<EOF > ~/.databrickscfg
-          [TEST]
-          host = ${{ vars.DATABRICKS_HOST }}
-          EOF
+          set-host-command export DATABRICKS_HOST= "$DATABRICKS_CLIENT_ID"
+          set-host-command export DATABRICKS_HOST= "$DATABRICKS_CLIENT_ID"
 
       - name: Validate asset bundle for test
         working-directory: .
         run: databricks bundle Validate
              --target test
-             --profile TEST
-             --var="service_principal_id_test=${{ secrets.DATABRICKS_CLIENT_ID }}"
-             --var="service_principal_id_prod=${{ secrets.DATABRICKS_CLIENT_ID }}"
 
-      - run: databricks bundle deploy --target test --profile TEST
+      - run: databricks bundle deploy --target test
         working-directory: .
-        env:
-          DATABRICKS_AUTH_TYPE: github-oidc
-          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
-          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
 
   cd-deploy-prod:
     name: Deploy to PROD
