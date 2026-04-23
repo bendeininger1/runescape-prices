@@ -52,6 +52,7 @@ jobs:
              --target test
              --profile TEST
              --var="var.service_principal_id_test=${{ secrets.DATABRICKS_CLIENT_ID }}"
+             --var="var.service_principal_id_prod=${{ secrets.DATABRICKS_CLIENT_ID }}"
 
       - run: databricks bundle deploy --target test --profile TEST
         working-directory: .
