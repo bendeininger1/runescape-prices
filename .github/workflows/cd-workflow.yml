@@ -41,8 +41,8 @@ jobs:
       - name: Set values for Databricks asset bundle definition
         shell: bash
         run: |
-          set-host-command export DATABRICKS_HOST= "$DATABRICKS_CLIENT_ID"
-          set-host-command export DATABRICKS_HOST= "$DATABRICKS_CLIENT_ID"
+          export DATABRICKS_HOST= "$DATABRICKS_CLIENT_ID"
+          export DATABRICKS_HOST= "$DATABRICKS_CLIENT_ID"
 
       - name: Validate asset bundle for test
         working-directory: .
