@@ -19,12 +19,6 @@ variables:
     description: The UUID of the service principal for test databricks env
   service_principal_id_prod:
     description: The UUID of the service principal for prod databricks env
-  workspace_host_dev:
-    description: host url of dev databricks env
-  workspace_host_test:
-    description: host url of test databricks env
-  workspace_host_prod:
-    description: host url of prod databricks env
 
 targets:
   dev:
@@ -35,7 +29,7 @@ targets:
     mode: development
     default: true
     workspace:
-      host: ${var.workspace_host_dev}
+      host: https://adb-7405610673533920.0.azuredatabricks.net
 
   test:
     mode: production
@@ -48,7 +42,6 @@ targets:
       name_prefix: '[testing] '
       trigger_pause_status: PAUSED
     workspace:
-      host: ${var.workspace_host_test}
       root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
     permissions:
       - service_principal_name: ${var.service_principal_id_test} # update with your service principal name
@@ -64,7 +57,6 @@ targets:
       dev_flag:
         default: false
     workspace:
-      host: ${var.workspace_host_prod}
       root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
     permissions:
       - service_principal_name: ${var.service_principal_id_prod} # update with your service principal name
