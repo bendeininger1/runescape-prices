@@ -15,6 +15,16 @@ variables:
     default: "runescape_dev"
   dev_flag:
     default: true
+  service_principal_id_test:
+    description: The UUID of the service principal for test databricks env
+  service_principal_id_prod:
+    description: The UUID of the service principal for prod databricks env
+  workspace_host_dev:
+    description: host url of dev databricks env
+  workspace_host_test:
+    description: host url of test databricks env
+  workspace_host_prod:
+    description: host url of prod databricks env
 
 targets:
   dev:
@@ -25,7 +35,7 @@ targets:
     mode: development
     default: true
     workspace:
-      host: https://adb-7405610673533920.0.azuredatabricks.net
+      host: ${var.workspace_host_dev}
 
   test:
     mode: production
@@ -36,15 +46,15 @@ targets:
         default: false
     presets:
       name_prefix: '[testing] '
-      trigger_pause_status: UNPAUSED
+      trigger_pause_status: PAUSED
     workspace:
-      host: https://adb-7405609042674093.13.azuredatabricks.net
+      host: ${var.workspace_host_test}
       root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
     permissions:
-      - service_principal_name: 07ec66d2-eff9-4580-91c1-1fdef498c3e7 # update with your service principal name
+      - service_principal_name: ${var.service_principal_id_test} # update with your service principal name
         level: CAN_MANAGE
     run_as:
-      service_principal_name: 07ec66d2-eff9-4580-91c1-1fdef498c3e7 # update with your service principal name
+      service_principal_name: ${var.service_principal_id_test} # update with your service principal name
 
   prod:
     mode: production
@@ -54,10 +64,10 @@ targets:
       dev_flag:
         default: false
     workspace:
-      host: https://adb-7405604569792585.5.azuredatabricks.net
+      host: ${var.workspace_host_prod}
       root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
     permissions:
-      - service_principal_name: f1ad9f02-7357-4764-8c55-b420118baf6c # update with your service principal name
+      - service_principal_name: ${var.service_principal_id_prod} # update with your service principal name
         level: CAN_MANAGE
     run_as:
-      service_principal_name: f1ad9f02-7357-4764-8c55-b420118baf6c # update with your service principal name
+      service_principal_name: ${var.service_principal_id_prod} # update with your service principal name
