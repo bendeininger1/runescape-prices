@@ -14,6 +14,10 @@ jobs:
     name: Deploy to TEST
     runs-on: ubuntu-latest
     environment: test
+    env:
+      DATABRICKS_AUTH_TYPE: github-oidc
+      DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+      DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v6.0.2
@@ -48,6 +52,7 @@ jobs:
         run: databricks bundle Validate
              --target test
              --profile TEST
+             --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID }}"
 
       - name: Deploy to TEST
         working-directory: .
