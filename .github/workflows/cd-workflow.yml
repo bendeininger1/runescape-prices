@@ -96,17 +96,19 @@ jobs:
           cat <<EOF > ~/.databrickscfg
           [PROD]
           host = ${{ vars.DATABRICKS_HOST }}
+          client_id = ${{ secrets.DATABRICKS_CLIENT_ID }}
           EOF
 
       - name: Validate asset bundle for prod
         working-directory: .
         run: databricks bundle Validate
-             --target prod --profile PROD
-             --var="service_principal_id_prod=${{ secrets.DATABRICKS_CLIENT_ID }}"
-          
-      - run: databricks bundle deploy --target prod --profile PROD
+             --target prod
+             --profile PROD
+             --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID }}"
+
+      - name: Deploy to PROD
         working-directory: .
-        env:
-          DATABRICKS_AUTH_TYPE: github-oidc
-          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
-          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+        run: databricks bundle deploy
+             --target prod
+             --profile PROD
+             --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID }}"
