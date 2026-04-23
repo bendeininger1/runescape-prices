@@ -17,10 +17,8 @@ variables:
     default: true
   service_principal_id_test:
     description: The UUID of the service principal for test databricks env
-    default: "placeholder"
   service_principal_id_prod:
     description: The UUID of the service principal for prod databricks env
-    default: "placeholder"
 
 targets:
   dev:
