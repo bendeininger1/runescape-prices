@@ -15,10 +15,6 @@ variables:
     default: "runescape_dev"
   dev_flag:
     default: true
-  DATABRICKS_CLIENT_ID:
-    description: The UUID of the service principal
-  DATABRICKS_HOST:
-    description: host url of databricks
 
 targets:
   dev:

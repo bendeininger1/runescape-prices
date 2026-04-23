@@ -14,10 +14,6 @@ jobs:
     name: Deploy to TEST
     runs-on: ubuntu-latest
     environment: test
-    env:
-      DATABRICKS_AUTH_TYPE: github-oidc
-      DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
-      DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v6.0.2
