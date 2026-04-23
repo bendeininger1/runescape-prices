@@ -59,6 +59,7 @@ jobs:
         run: databricks bundle deploy
              --target test
              --profile TEST
+             --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID }}"
 
   cd-deploy-prod:
     name: Deploy to PROD
