@@ -38,14 +38,22 @@ jobs:
           pip install ./dist/rs_project-0.0.10-py3-none-any.whl
           pip install -r requirements-pyspark.txt
 
+      - name: Configure Databricks
+        run: |
+          # write out the profile (here called "TEST")
+          cat <<EOF > ~/.databrickscfg
+          [TEST]
+          host = ${{ vars.DATABRICKS_HOST }}
+          EOF
+
       - name: Validate asset bundle for test
         working-directory: .
         run: databricks bundle Validate
              --target test
+             --profile TEST
              --var="var.service_principal_id_test=${{ secrets.DATABRICKS_CLIENT_ID }}"
-             --var="var.workspace_host_test=${{ vars.DATABRICKS_HOST }}"
 
-      - run: databricks bundle deploy --target test
+      - run: databricks bundle deploy --target test --profile TEST
         working-directory: .
         env:
           DATABRICKS_AUTH_TYPE: github-oidc
@@ -81,14 +89,21 @@ jobs:
           pip install ./dist/rs_project-0.0.10-py3-none-any.whl
           pip install -r requirements-pyspark.txt
 
+      - name: Configure Databricks
+        run: |
+          # write out the profile (here called "PROD")
+          cat <<EOF > ~/.databrickscfg
+          [PROD]
+          host = ${{ vars.DATABRICKS_HOST }}
+          EOF
+
       - name: Validate asset bundle for prod
         working-directory: .
         run: databricks bundle Validate
-             --target test
+             --target prod --profile PROD
              --var="var.service_principal_id_prod=${{ secrets.DATABRICKS_CLIENT_ID }}"
-             --var="var.workspace_host_prod=${{ vars.DATABRICKS_HOST }}"
           
-      - run: databricks bundle deploy --target prod
+      - run: databricks bundle deploy --target prod --profile PROD
         working-directory: .
         env:
           DATABRICKS_AUTH_TYPE: github-oidc
