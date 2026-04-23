@@ -15,10 +15,8 @@ variables:
     default: "runescape_dev"
   dev_flag:
     default: true
-  DATABRICKS_CLIENT_ID:
-    description: The UUID of the service principal
-  DATABRICKS_HOST:
-    description: host url of databricks
+  service_principal_id:
+    description: UUID for service principal
 
 targets:
   dev:
@@ -44,10 +42,10 @@ targets:
     workspace:
       root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
     permissions:
-      - service_principal_name: ${var.DATABRICKS_CLIENT_ID} # update with your service principal name
+      - service_principal_name: ${var.service_principal_id} # update with your service principal name
         level: CAN_MANAGE
     run_as:
-      service_principal_name: ${var.DATABRICKS_CLIENT_ID} # update with your service principal name
+      service_principal_name: ${var.service_principal_id} # update with your service principal name
 
   prod:
     mode: production
@@ -59,7 +57,7 @@ targets:
     workspace:
       root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
     permissions:
-      - service_principal_name: ${var.DATABRICKS_CLIENT_ID} # update with your service principal name
+      - service_principal_name: ${var.service_principal_id} # update with your service principal name
         level: CAN_MANAGE
     run_as:
-      service_principal_name: ${var.DATABRICKS_CLIENT_ID} # update with your service principal name
+      service_principal_name: ${var.service_principal_id} # update with your service principal name
