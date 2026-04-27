@@ -1,7 +1,7 @@
 resources:
   jobs:
-    1m_prices_silver:
-      name: 1m_prices_silver
+    transform_1m_prices_silver:
+      name: transform_1m_prices_silver
       schedule:
         quartz_cron_expression: 38 3/10 * * * ?
         timezone_id: America/New_York

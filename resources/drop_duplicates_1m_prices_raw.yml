@@ -1,14 +1,14 @@
 resources:
   jobs:
-    1m_prices_raw_drop_duplicates:
-      name: 1m_prices_raw_drop_duplicates
+    drop_duplicates_1m_prices_raw:
+      name: drop_duplicates_1m_prices_raw
       schedule:
         quartz_cron_expression: 36 0/10 * * * ?
         timezone_id: America/New_York
       tasks:
-        - task_key: 00_drop_duplicates_raw_table
+        - task_key: 00_drop_duplicates_1m_prices_raw
           notebook_task:
-            notebook_path: ../transformations/01_bronze/drop_duplicates_raw_table.ipynb
+            notebook_path: ../transformations/01_bronze/1m_prices_raw_drop_duplicates.ipynb
             source: WORKSPACE
           environment_key: Default
       queue:
