@@ -1,14 +1,14 @@
 resources:
   jobs:
-    runescape_prices_ingest:
-      name: runescape_prices_ingest
+    1m_prices_raw_drop_duplicates:
+      name: 1m_prices_raw_drop_duplicates
       schedule:
-        quartz_cron_expression: 58 * * * * ?
+        quartz_cron_expression: 36 0/10 * * * ?
         timezone_id: America/New_York
       tasks:
-        - task_key: 00_ingest_latest_prices
+        - task_key: 00_drop_duplicates_raw_table
           notebook_task:
-            notebook_path: ../transformations/00_landing/ingest_latest_prices.ipynb
+            notebook_path: ../transformations/01_bronze/drop_duplicates_raw_table.ipynb
             source: WORKSPACE
           environment_key: Default
       queue:
@@ -19,7 +19,5 @@ resources:
       environments:
         - environment_key: Default
           spec:
-            dependencies:
-              - ../dist/*.whl
             environment_version: "5"
       performance_target: PERFORMANCE_OPTIMIZED

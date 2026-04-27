@@ -1,21 +1,21 @@
 resources:
   jobs:
-    runescape_prices_silver:
-      name: runescape_prices_silver
+    1m_prices_silver:
+      name: 1m_prices_silver
       schedule:
         quartz_cron_expression: 38 3/10 * * * ?
         timezone_id: America/New_York
       tasks:
-        - task_key: 01_latest_prices_cleansed
+        - task_key: 01_1m_prices_cleansed
           notebook_task:
-            notebook_path: ../transformations/02_silver/latest_prices_cleansed.ipynb
+            notebook_path: ../transformations/02_silver/1m_prices_cleansed.ipynb
             source: WORKSPACE
           environment_key: Default
-        - task_key: 02_latest_prices_enriched
+        - task_key: 02_1m_prices_enriched
           depends_on:
-            - task_key: 01_latest_prices_cleansed
+            - task_key: 01_1m_prices_cleansed
           notebook_task:
-            notebook_path: ../transformations/02_silver/latest_prices_enriched.ipynb
+            notebook_path: ../transformations/02_silver/1m_prices_enriched.ipynb
             source: WORKSPACE
           environment_key: Default
       queue:

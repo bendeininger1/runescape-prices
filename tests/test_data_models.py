@@ -111,7 +111,7 @@ def test_make_df_1m_price(spark):
         }
     }'''
     # Create data frame
-    df_raw = spark.read.json("tests/data/latest_prices_test.json", multiLine =True)
+    df_raw = spark.read.json("tests/data/1m_prices_test.json", multiLine =True)
 
     # Create data frame using data_models util
     result_df = make_df_1m_price(spark, df_raw)
