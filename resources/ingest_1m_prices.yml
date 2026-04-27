@@ -1,6 +1,7 @@
 resources:
   jobs:
     ingest_1m_prices:
+      max_concurrent_runs: 5
       name: ingest_1m_prices
       schedule:
         quartz_cron_expression: 58 * * * * ?
