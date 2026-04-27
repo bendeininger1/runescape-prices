@@ -17,6 +17,7 @@ variables:
     default: true
   service_principal_id:
     description: UUID for service principal
+    default: missing value
 
 targets:
   dev:
