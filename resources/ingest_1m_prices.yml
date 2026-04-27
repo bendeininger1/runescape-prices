@@ -1,15 +1,15 @@
 resources:
   jobs:
-    runescape_prices_ingest:
+    ingest_1m_prices:
       max_concurrent_runs: 5
-      name: runescape_prices_ingest
+      name: ingest_1m_prices
       schedule:
         quartz_cron_expression: 58 * * * * ?
         timezone_id: America/New_York
       tasks:
-        - task_key: 00_ingest_latest_prices
+        - task_key: 00_ingest_1m_prices
           notebook_task:
-            notebook_path: ../transformations/00_landing/ingest_latest_prices.ipynb
+            notebook_path: ../transformations/00_landing/ingest_1m_prices.ipynb
             source: WORKSPACE
           environment_key: Default
       queue:

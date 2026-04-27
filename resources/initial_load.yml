@@ -4,9 +4,9 @@ resources:
       name: initial_load
       max_concurrent_runs: 1
       tasks:
-        - task_key: 01_latest_prices_raw_table_create
+        - task_key: 01_1m_prices_raw_table_create
           notebook_task:
-            notebook_path: ../one_off/initial_load/01_bronze/latest_prices_raw_table_create.ipynb
+            notebook_path: ../one_off/initial_load/01_bronze/1m_prices_raw_table_create.ipynb
             source: WORKSPACE
           environment_key: Default
         - task_key: 01_1h_prices_table_create
@@ -19,14 +19,14 @@ resources:
             notebook_path: ../one_off/initial_load/01_bronze/1h_prices_table_create.ipynb
             source: WORKSPACE
           environment_key: Default
-        - task_key: 01_latest_prices_cleansed_table_create
+        - task_key: 01_1m_prices_cleansed_table_create
           notebook_task:
-            notebook_path: ../one_off/initial_load/02_silver/latest_prices_cleansed_table_create.ipynb
+            notebook_path: ../one_off/initial_load/02_silver/1m_prices_cleansed_table_create.ipynb
             source: WORKSPACE
           environment_key: Default
-        - task_key: 01_latest_prices_enriched_table_create
+        - task_key: 01_1m_prices_enriched_table_create
           notebook_task:
-            notebook_path: ../one_off/initial_load//02_silver/latest_prices_enriched_table_create.ipynb
+            notebook_path: ../one_off/initial_load//02_silver/1m_prices_enriched_table_create.ipynb
             source: WORKSPACE
           environment_key: Default
         - task_key: 01_1h_prices_cleansed_table_create

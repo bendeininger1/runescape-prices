@@ -28,25 +28,25 @@ def test_archive_raw_files():
 
     # Copy test files to source_path
     # This file should be moved based on the timestamp
-    old_file_name = "latest_prices_1776697045.json"
+    old_file_name = "1m_prices_1776697045.json"
     # This file should not be moved based on the timestamp
-    recent_file_name = "latest_prices_"+str(unix_timestamp)+".json"
+    recent_file_name = "1m_prices_"+str(unix_timestamp)+".json"
 
     # Copy both files to ../tests/data/fs_utils/archive/source for testing
-    shutil.copyfile("tests/data/fs_utils/archive_raw_files/original_file/latest_prices_1776697045.json",
+    shutil.copyfile("tests/data/fs_utils/archive_raw_files/original_file/1m_prices_1776697045.json",
                     source_path+old_file_name)
-    shutil.copyfile("tests/data/fs_utils/archive_raw_files/original_file/latest_prices_1776697045.json",
+    shutil.copyfile("tests/data/fs_utils/archive_raw_files/original_file/1m_prices_1776697045.json",
                     source_path+recent_file_name)
 
     archive_raw_files(source_path, dest_path, time_filter)
 
     # Original file should still be located here...
-    assertion1 = os.path.exists("tests/data/fs_utils/archive_raw_files/original_file/latest_prices_1776697045.json") #True
+    assertion1 = os.path.exists("tests/data/fs_utils/archive_raw_files/original_file/1m_prices_1776697045.json") #True
 
     # Old file should be in dest_path
-    assertion2 = os.path.exists("tests/data/fs_utils/archive_raw_files/destination/latest_prices_1776697045.json") #True
+    assertion2 = os.path.exists("tests/data/fs_utils/archive_raw_files/destination/1m_prices_1776697045.json") #True
     # Old file should not be in source_path
-    assertion3 = os.path.exists("tests/data/fs_utils/archive_raw_files/source/latest_prices_1776697045.json") #False
+    assertion3 = os.path.exists("tests/data/fs_utils/archive_raw_files/source/1m_prices_1776697045.json") #False
 
     # recent file should not be in dest_path
     assertion4 = os.path.exists("tests/data/fs_utils/archive_raw_files/destination/" + recent_file_name) #False
