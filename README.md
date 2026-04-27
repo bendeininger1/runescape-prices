@@ -41,6 +41,7 @@ graph TB
 
 ### Data Flow Diagram
 
+TODO add archival jobs to data flow.  
 <p align="center">
   <img src="docs/runescape.png" alt="Data Flow Diagram" width="100%"/>
 </p>
