@@ -1,13 +1,23 @@
 resources:
   jobs:
+    # This job recursively drops all tables in a given catalog.  Be careful using this.
+    # There is a check to see if catalog is prod to prevent prod from being dropped...
     drop_all_tables:
       name: drop_all_tables
+      email_notifications:
+        on_failure:
+          - bendeiningerdatabricks@gmail.com
+        on_duration_warning_threshold_exceeded:
+          - bendeiningerdatabricks@gmail.com
       tasks:
         - task_key: 00_drop_all_tables
           notebook_task:
             notebook_path: ../one_off/drop_all_tables.ipynb
             source: WORKSPACE
           environment_key: Default
+      # Only 1 instance of this job should run
+      queue:
+        enabled: false
       parameters:
         - name: catalog
           default: ${var.catalog}

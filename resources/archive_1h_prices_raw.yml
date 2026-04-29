@@ -1,7 +1,24 @@
 resources:
   jobs:
+    # job to archive raw 15 price json fies to improve performance.
+    # Job moves files older than "time_filter" of 5 hours (set in notebook)
     archive_1h_prices_raw:
       name: archive_1h_prices_raw
+      email_notifications:
+        on_failure:
+          - bendeiningerdatabricks@gmail.com
+        on_duration_warning_threshold_exceeded:
+          - bendeiningerdatabricks@gmail.com
+      # This job takes roughly 30 seconds to run
+      # timeout after 10 minutes
+      timeout_seconds: 600
+      health:
+        # Set rule for 2x approx run duration
+        rules:
+          - metric: RUN_DURATION_SECONDS
+            op: GREATER_THAN
+            value: 60
+      # 10 Minutes
       schedule:
         quartz_cron_expression: 33 0/10 * * * ?
         timezone_id: America/New_York
@@ -12,6 +29,7 @@ resources:
             notebook_path: ../transformations/00_landing/archive_1h_prices_raw.ipynb
             source: WORKSPACE
           environment_key: Default
+      # Only 1 instance of this job should run at a time
       queue:
         enabled: false
       parameters:

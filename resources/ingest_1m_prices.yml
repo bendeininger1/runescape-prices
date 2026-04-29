@@ -1,8 +1,24 @@
 resources:
   jobs:
     ingest_1m_prices:
+      # I am not sure if this should be 1... 4/27/26
       max_concurrent_runs: 5
       name: ingest_1m_prices
+      email_notifications:
+        on_failure:
+          - bendeiningerdatabricks@gmail.com
+        on_duration_warning_threshold_exceeded:
+          - bendeiningerdatabricks@gmail.com
+      # This job takes roughly 30 seconds to run
+      # timeout after 10 minutes
+      timeout_seconds: 600
+      health:
+        # Set rule for 2x approx run duration
+        rules:
+          - metric: RUN_DURATION_SECONDS
+            op: GREATER_THAN
+            value: 60
+      # 10 Minutes
       schedule:
         quartz_cron_expression: 58 * * * * ?
         timezone_id: America/New_York
@@ -12,6 +28,7 @@ resources:
             notebook_path: ../transformations/00_landing/ingest_1m_prices.ipynb
             source: WORKSPACE
           environment_key: Default
+      # More than 1 instance of this could be running at the same time.
       queue:
         enabled: true
       parameters:

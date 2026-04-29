@@ -2,7 +2,21 @@ resources:
   jobs:
     initial_load:
       name: initial_load
+      email_notifications:
+        on_failure:
+          - bendeiningerdatabricks@gmail.com
+        on_duration_warning_threshold_exceeded:
+          - bendeiningerdatabricks@gmail.com
       max_concurrent_runs: 1
+      # This job takes roughly 3 minutes to run
+      # timeout after 10 minutes
+      timeout_seconds: 600
+      health:
+        # Set rule for 5 minutes
+        rules:
+          - metric: RUN_DURATION_SECONDS
+            op: GREATER_THAN
+            value: 300
       tasks:
         - task_key: 01_1m_prices_raw_table_create
           notebook_task:
@@ -87,8 +101,9 @@ resources:
             notebook_path: ../one_off/initial_load/02_silver/skill_action_enriched.ipynb
             source: WORKSPACE
           environment_key: Default 
+      # Only 1 instance of this job should run
       queue:
-        enabled: true
+        enabled: false
       parameters:
         - name: catalog
           default: ${var.catalog}

@@ -2,6 +2,11 @@ resources:
   jobs:
     ingest_1m_prices_bronze:
       name: ingest_1m_prices_bronze
+      email_notifications:
+        on_failure:
+          - bendeiningerdatabricks@gmail.com
+        on_duration_warning_threshold_exceeded:
+          - bendeiningerdatabricks@gmail.com
       trigger:
         file_arrival:
           url: /Volumes/${var.catalog}/00_landing/data_sources/1m_prices/
@@ -11,6 +16,7 @@ resources:
             notebook_path: ../transformations/01_bronze/1m_prices.ipynb
             source: WORKSPACE
           environment_key: Default
+      # Only 1 instance of this job should run at a time
       queue:
         enabled: false
       parameters:
