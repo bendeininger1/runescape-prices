@@ -1,10 +1,27 @@
 resources:
   jobs:
+    # job to ingest the hourly '1h' price data and process the data all the way through the gold layer.
     ingest_1h_prices:
       name: ingest_1h_prices
+      email_notifications:
+        on_failure:
+          - bendeiningerdatabricks@gmail.com
+        on_duration_warning_threshold_exceeded:
+          - bendeiningerdatabricks@gmail.com
+      # This job takes roughly 3 minutes to run
+      # timeout after 10 minutes
+      timeout_seconds: 600
+      health:
+        # Set rule for 5 minutes
+        rules:
+          - metric: RUN_DURATION_SECONDS
+            op: GREATER_THAN
+            value: 300
       schedule:
         quartz_cron_expression: 45 10 * * * ?
         timezone_id: UTC
+      # set to limit to 10 runs
+      max_concurrent_runs: 10
       tasks:
         - task_key: 00_ingest_1h_prices
           notebook_task:
@@ -46,6 +63,7 @@ resources:
             notebook_path: ../transformations/03_gold/1h_skill_profit.ipynb
             source: WORKSPACE
           environment_key: Default
+      # Multiple runs of this can occur (if backloading.)
       queue:
         enabled: true
       parameters:

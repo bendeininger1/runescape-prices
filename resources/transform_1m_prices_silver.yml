@@ -2,6 +2,21 @@ resources:
   jobs:
     transform_1m_prices_silver:
       name: transform_1m_prices_silver
+      email_notifications:
+        on_failure:
+          - bendeiningerdatabricks@gmail.com
+        on_duration_warning_threshold_exceeded:
+          - bendeiningerdatabricks@gmail.com
+      # This job takes roughly 1 minutes to run
+      # timeout after 10 minutes
+      timeout_seconds: 600
+      health:
+        # Set rule for 5 minutes
+        rules:
+          - metric: RUN_DURATION_SECONDS
+            op: GREATER_THAN
+            value: 300
+      # 10 minnutes, starting at 3 minutes past the hour.
       schedule:
         quartz_cron_expression: 38 3/10 * * * ?
         timezone_id: America/New_York
@@ -18,8 +33,9 @@ resources:
             notebook_path: ../transformations/02_silver/1m_prices_enriched.ipynb
             source: WORKSPACE
           environment_key: Default
+      # Only 1 instance of this job should run at a time
       queue:
-        enabled: true
+        enabled: false
       parameters:
         - name: catalog
           default: ${var.catalog}

@@ -1,7 +1,24 @@
 resources:
   jobs:
+    # job to drop duplicate prices (where the price, time, and high/ low are the same)
+    # this job is needed because of the append only writes for the raw ingestion (for performance)
     drop_duplicates_1m_prices_raw:
       name: drop_duplicates_1m_prices_raw
+      email_notifications:
+        on_failure:
+          - bendeiningerdatabricks@gmail.com
+        on_duration_warning_threshold_exceeded:
+          - bendeiningerdatabricks@gmail.com
+      # This job takes roughly 30 seconds to run
+      # timeout after 10 minutes
+      timeout_seconds: 600
+      health:
+        # Set rule for 2x approx run duration
+        rules:
+          - metric: RUN_DURATION_SECONDS
+            op: GREATER_THAN
+            value: 60
+      # 10 Minutes
       schedule:
         quartz_cron_expression: 36 0/10 * * * ?
         timezone_id: America/New_York
@@ -11,8 +28,9 @@ resources:
             notebook_path: ../transformations/01_bronze/1m_prices_raw_drop_duplicates.ipynb
             source: WORKSPACE
           environment_key: Default
+      # Only 1 instance of this job should run at a time
       queue:
-        enabled: true
+        enabled: false
       parameters:
         - name: catalog
           default: ${var.catalog}
