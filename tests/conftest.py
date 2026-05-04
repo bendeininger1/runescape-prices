@@ -11,7 +11,7 @@ def spark():
     # When using databricks connect
     try:
         from databricks.connect import DatabricksSession
-        spark = DatabricksSession.builder.getOrCreate()
+        spark = DatabricksSession.builder.serverless().getOrCreate()
     except ImportError:
         # When using pyspark
         try:
