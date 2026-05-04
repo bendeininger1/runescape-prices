@@ -3,10 +3,7 @@ name = "runescape-prices"
 version = "0.0.11"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.12.10"
-dependencies = [
-    "runescape_prices",
-]
+requires-python = ">=3.12"
 
 
 [dependency-groups]
