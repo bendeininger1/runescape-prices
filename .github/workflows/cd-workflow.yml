@@ -61,6 +61,17 @@ jobs:
              --target test
              --profile TEST
              --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID }}"
+      
+      - name: Run pytest
+        run: |
+          uv run pytest \
+            --cov-report=html
+            
+      - name: Upload coverage HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-html
+          path: htmlcov
 
   cd-deploy-prod:
     name: Deploy to PROD

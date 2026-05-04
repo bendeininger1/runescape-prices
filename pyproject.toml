@@ -8,8 +8,15 @@ dependencies = [
     "runescape_prices",
 ]
 
-# integration-tests uses dbc (databricks connect) (connects to dataabricks to run tests)
+
 [dependency-groups]
+# dev 
+dev = [
+    "pytest==8.3.5",
+    "pytest-cov==7.1.0",
+    "databricks-labs-pytester~=0.7"
+]
+# integration-tests uses dbc (databricks connect) (connects to dataabricks to run tests)
 integration-tests = [
     "aiohappyeyeballs==2.4.4",
     "aiohttp==3.11.10",
@@ -52,7 +59,6 @@ integration-tests = [
     "cython==3.1.5",
     "databricks-agents==1.9.1",
     "databricks-connect==18.0.5",
-    "databricks-labs-pytester~=0.7",
     "databricks-sdk==0.67.0",
     "dataclasses-json==0.6.7",
     "debugpy==1.8.11",
@@ -531,3 +537,6 @@ unit-tests = [
 
 [tool.uv.sources]
 rs-project = { path = "dist/rs_project-0.0.11-py3-none-any.whl" }
+
+[tool.uv]
+default-groups = ["dev"]

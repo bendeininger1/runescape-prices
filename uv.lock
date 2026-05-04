@@ -3572,6 +3572,11 @@ version = "0.0.11"
 source = { virtual = "." }
 
 [package.dev-dependencies]
+dev = [
+    { name = "databricks-labs-pytester" },
+    { name = "pytest" },
+    { name = "pytest-cov" },
+]
 env-5 = [
     { name = "aiohappyeyeballs" },
     { name = "aiohttp" },
@@ -3858,7 +3863,6 @@ integration-tests = [
     { name = "cython" },
     { name = "databricks-agents" },
     { name = "databricks-connect" },
-    { name = "databricks-labs-pytester" },
     { name = "databricks-sdk" },
     { name = "dataclasses-json" },
     { name = "debugpy" },
@@ -4093,6 +4097,11 @@ unit-tests = [
 requires-dist = [{ name = "runescape-prices" }]
 
 [package.metadata.requires-dev]
+dev = [
+    { name = "databricks-labs-pytester", specifier = "~=0.7" },
+    { name = "pytest", specifier = "==8.3.5" },
+    { name = "pytest-cov", specifier = "==7.1.0" },
+]
 env-5 = [
     { name = "aiohappyeyeballs", specifier = "==2.4.4" },
     { name = "aiohttp", specifier = "==3.11.10" },
@@ -4379,7 +4388,6 @@ integration-tests = [
     { name = "cython", specifier = "==3.1.5" },
     { name = "databricks-agents", specifier = "==1.9.1" },
     { name = "databricks-connect", specifier = "==18.0.5" },
-    { name = "databricks-labs-pytester", specifier = "~=0.7" },
     { name = "databricks-sdk", specifier = "==0.67.0" },
     { name = "dataclasses-json", specifier = "==0.6.7" },
     { name = "debugpy", specifier = "==1.8.11" },
