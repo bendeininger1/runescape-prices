@@ -1,0 +1,5 @@
+[run]
+omit =
+    # files to be excluded from coverage reporting
+    src/__init__.py
+    src/*/__init__.py

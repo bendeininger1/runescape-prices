@@ -1,10 +1,10 @@
 # test_data_models.py
-
-from utils.data_models import make_df_1m_price, make_df_1h_price, make_df_1h_price_last_enriched
+import pytest
+from src.utils.data_models import make_df_1m_price, make_df_1h_price, make_df_1h_price_last_enriched
 from pyspark.testing.utils import assertDataFrameEqual
 from pyspark.sql.types import StructType, StructField, LongType, StringType, IntegerType, DoubleType
 
-
+@pytest.mark.unit_test
 def test_make_df_1h_price(spark):
     
     # Create a example json data
@@ -30,6 +30,7 @@ def test_make_df_1h_price(spark):
 
     assertDataFrameEqual(result_df, expected_df)
 
+@pytest.mark.unit_test
 def test_make_df_1h_price_last_enriched(spark):
 
     # Create example data input
@@ -85,6 +86,7 @@ def test_make_df_1h_price_last_enriched(spark):
 
     assertDataFrameEqual(result_df, expected_df)
 
+@pytest.mark.unit_test
 def test_make_df_1m_price(spark):
     
     # Create a example json data
@@ -111,7 +113,7 @@ def test_make_df_1m_price(spark):
         }
     }'''
     # Create data frame
-    df_raw = spark.read.json("tests/data/1m_prices_test.json", multiLine =True)
+    df_raw = spark.read.json("tests/unit/data/1m_prices_test.json", multiLine =True)
 
     # Create data frame using data_models util
     result_df = make_df_1m_price(spark, df_raw)
