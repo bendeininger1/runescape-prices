@@ -1,6 +1,6 @@
 version = 1
 revision = 3
-requires-python = ">=3.12.10"
+requires-python = ">=3.12"
 resolution-markers = [
     "python_full_version >= '3.13'",
     "python_full_version < '3.13'",
@@ -4094,7 +4094,6 @@ unit-tests = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "runescape-prices" }]
 
 [package.metadata.requires-dev]
 dev = [
