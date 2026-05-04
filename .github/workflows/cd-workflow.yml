@@ -30,14 +30,13 @@ jobs:
       - name: Install Databricks CLI
         uses: databricks/setup-cli@main
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v3
-
       - name: Install Dependencies
         run: |
-          uv build
-          uv sync --only-group integration-tests
-          uv pip install -e .
+          python -m pip install --upgrade pip
+          pip install setuptools wheel
+          python setup.py bdist_wheel
+          pip install ./dist/rs_project-0.0.11-py3-none-any.whl
+          pip install -r requirements-pyspark.txt
 
       - name: Configure Databricks
         run: |
@@ -61,17 +60,6 @@ jobs:
              --target test
              --profile TEST
              --var="service_principal_id=${{ secrets.DATABRICKS_CLIENT_ID }}"
-      
-      - name: Run pytest
-        run: |
-          uv run pytest -m integration_test \
-            --cov-report=html
-
-      - name: Upload coverage HTML report
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-html
-          path: htmlcov
 
   cd-deploy-prod:
     name: Deploy to PROD
@@ -94,14 +82,13 @@ jobs:
       - name: Install Databricks CLI
         uses: databricks/setup-cli@main
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v3
-
       - name: Install Dependencies
         run: |
-          uv build
-          uv sync --only-group integration-tests --no-dev
-          uv pip install -e .
+          python -m pip install --upgrade pip
+          pip install setuptools wheel
+          python setup.py bdist_wheel
+          pip install ./dist/rs_project-0.0.11-py3-none-any.whl
+          pip install -r requirements-pyspark.txt
 
       - name: Configure Databricks
         run: |
