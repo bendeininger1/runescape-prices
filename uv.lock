@@ -3510,20 +3510,6 @@ wheels = [
 ]
 
 [[package]]
-name = "rs-project"
-version = "0.0.11"
-source = { path = "dist/rs_project-0.0.11-py3-none-any.whl" }
-dependencies = [
-    { name = "setuptools" },
-]
-wheels = [
-    { filename = "rs_project-0.0.11-py3-none-any.whl", hash = "sha256:1b77a94b3767577827b6c01a33f294e3f5ae7773f902e266be2dfe16409150e3" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "setuptools" }]
-
-[[package]]
 name = "rsa"
 version = "4.9.1"
 source = { registry = "https://pypi.org/simple" }
@@ -3539,9 +3525,6 @@ wheels = [
 name = "runescape-prices"
 version = "0.0.11"
 source = { virtual = "." }
-dependencies = [
-    { name = "rs-project" },
-]
 
 [package.dev-dependencies]
 env-5 = [
@@ -4061,7 +4044,7 @@ unit-tests = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rs-project", path = "dist/rs_project-0.0.11-py3-none-any.whl" }]
+requires-dist = [{ name = "runescape-prices" }]
 
 [package.metadata.requires-dev]
 env-5 = [

@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12.10"
 dependencies = [
-    "rs-project",
+    "runescape_prices",
 ]
 
 # integration-tests uses dbc (databricks connect) (connects to dataabricks to run tests)

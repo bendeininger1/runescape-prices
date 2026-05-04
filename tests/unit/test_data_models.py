@@ -1,6 +1,6 @@
 # test_data_models.py
 import pytest
-from utils.data_models import make_df_1m_price, make_df_1h_price, make_df_1h_price_last_enriched
+from src.utils.data_models import make_df_1m_price, make_df_1h_price, make_df_1h_price_last_enriched
 from pyspark.testing.utils import assertDataFrameEqual
 from pyspark.sql.types import StructType, StructField, LongType, StringType, IntegerType, DoubleType
 

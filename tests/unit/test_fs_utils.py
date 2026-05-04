@@ -2,7 +2,7 @@ import pytest
 import os
 import shutil
 from time import time
-from utils.fs_utils import archive_raw_files
+from src.utils.fs_utils import archive_raw_files
 from pathlib import Path
 
 @pytest.mark.unit_test
