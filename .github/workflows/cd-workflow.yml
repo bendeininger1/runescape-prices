@@ -46,6 +46,7 @@ jobs:
           [TEST]
           host = ${{ vars.DATABRICKS_HOST }}
           client_id = ${{ secrets.DATABRICKS_CLIENT_ID }}
+          serverless_compute_id = auto
           EOF
 
       - name: Validate asset bundle for test
@@ -110,6 +111,7 @@ jobs:
           [PROD]
           host = ${{ vars.DATABRICKS_HOST }}
           client_id = ${{ secrets.DATABRICKS_CLIENT_ID }}
+          serverless_compute_id = auto
           EOF
 
       - name: Validate asset bundle for prod
