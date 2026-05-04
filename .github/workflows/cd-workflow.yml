@@ -100,7 +100,7 @@ jobs:
       - name: Install Dependencies
         run: |
           uv build
-          uv sync --only-group integration-tests
+          uv sync --only-group integration-tests --no-dev
           uv pip install -e .
 
       - name: Configure Databricks
