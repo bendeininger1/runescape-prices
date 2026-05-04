@@ -35,7 +35,7 @@ jobs:
 
       - name: Run pytest & generate HTML report
         run: |
-          uv run pytest \
+          uv run pytest -m unit_test \
             --cov-report=html
       - name: Upload coverage HTML report
         uses: actions/upload-artifact@v4
